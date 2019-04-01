@@ -32,6 +32,8 @@ gem 'jbuilder', '~> 2.5'
 gem "rubycritic", require: false
 # Cleans the syntax
 gem 'rubocop', require: false
+# Encrypts data
+gem 'figaro'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
