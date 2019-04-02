@@ -29,11 +29,13 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 # Cleans the code
-gem "rubycritic", require: false
+gem 'rubycritic', require: false
 # Cleans the syntax
 gem 'rubocop', require: false
 # Encrypts data
 gem 'figaro'
+# Devise
+gem 'devise'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
