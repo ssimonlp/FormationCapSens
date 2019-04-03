@@ -23,7 +23,7 @@
 
 	<div class="field mt-3">
 		<%= f.label "Date of Birth" %> <br />
-		<%= p.date_select :dob, order: %i[day month year], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year, end_year: Date.today.year - 100  %>
+		<%= p.date_select :date_of_birth, order: %i[day month year], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year, end_year: Date.today.year - 100  %>
 	</div>
 <% end %>
   <div class="field mt-3">
