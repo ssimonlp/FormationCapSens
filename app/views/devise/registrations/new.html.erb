@@ -1,32 +1,32 @@
-<h2>Sign up</h2>
-<% resource.build_profile %>
+<div class="container-fluid" style="height: 100vh;">
+<div class="container">
+<div class="row">
+<div class="col-lg-6 col-sm-12">
+<h2 class="mb-6 mt-5">Sign Up</h2>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
+  <div class="field mt-3">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
 <%= f.fields_for :profile do |p| %>
-	<div class="field">
-		
+	<div class="field mt-3">
 		<%= p.label :first_name %><br />
 		<%= p.text_field :first_name %>
 	</div>
 
-	<div class="field">
-		
+	<div class="field mt-3">
 		<%= p.label :last_name %><br />
 		<%= p.text_field :last_name%>
 	</div>
 
-	<div class="field">
-		
+	<div class="field mt-3">
 		<%= f.label "Date of Birth" %> <br />
-		<%= p.date_select :dob, order: %i[day month year] %>
+		<%= p.date_select :dob, order: %i[day month year], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year, end_year: Date.today.year - 100  %>
 	</div>
 <% end %>
-  <div class="field">
+  <div class="field mt-3">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
@@ -34,13 +34,17 @@
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
-  <div class="field">
+  <div class="field mt-3">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="actions mt-4 mb-3">
+    <%= f.submit "Sign up", class: "btn btn-primary mb-4" %>
   </div>
 <% end %>
-<%= render "users/shared/links" %>
+<%= render "devise/shared/links" %>
+</div>
+</div>
+</div>
+</div>
