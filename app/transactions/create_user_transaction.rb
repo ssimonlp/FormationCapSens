@@ -1,24 +1,19 @@
 require "dry/transaction"
 
 class CreateUserTransaction
-  include Dry::transaction
+  include Dry::Transaction
 
-  step :validate
   step :create
-  step :notify
-  
+
   private
 
   def create(input)
-    u = User.new(email: input[:email], password: input[:password], profile_attributes: { first_name: input[:profile_attributes][:first_name], last_name: input[:profile_attributes][:last_name], dob: input[:profile_attributes][:dob]})
+    u = User.new(email: input[:email], password: input[:password], profile_attributes: { first_name: input[:profile_attributes][:first_name], last_name: input[:profile_attributes][:last_name], date_of_birth: input[:profile_attributes][:date_of_birth]})
     if u.valid?
-      u.save
-      Success(email: input[:email], password: input[:password], first_name: input[:profile_attributes][:first_name], last_name: input[:profile_attributes][:last_name], dob: input[:profile_attributes][:dob])
+      u.save!
+      Success(email: input[:email], password: input[:password], first_name: input[:profile_attributes][:first_name], last_name: input[:profile_attributes][:last_name], dob: input[:profile_attributes][:date_of_birth])
     else
       Faillure("Wrong arguments")
-  end
-
-  def notify(input)
-    
+    end
   end
 end
