@@ -8,7 +8,8 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
 
-  accepts_nested_attributes_for :profile
-
+  accepts_nested_attributes_for :profile, allow_destroy: true
+  
+  validates_presence_of :profile
   validates_associated :profile
 end

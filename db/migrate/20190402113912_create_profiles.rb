@@ -7,7 +7,7 @@ class CreateProfiles < ActiveRecord::Migration[5.2]
       t.string :last_name
       t.date :date_of_birth
       t.inet :registration_ip
-      t.belongs_to :user
+      t.belongs_to :user, index: true
       t.timestamps
     end
   end
