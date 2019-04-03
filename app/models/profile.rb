@@ -5,5 +5,5 @@ class Profile < ApplicationRecord
 
   validates :first_name, presence: true, format: { with: /\A[[:alpha:]]+([\-\' ][[:alpha:]]+)*\z/ }
   validates :last_name, presence: true, format: { with: /\A[[:alpha:]]+([\-\' ][[:alpha:]]+)*\z/ }
-  validates :dob, presence: true
+  validates :date_of_birth, presence: true
 end

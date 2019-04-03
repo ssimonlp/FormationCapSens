@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2019_04_02_113912) do
   create_table "profiles", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.date "dob"
+    t.date "date_of_birth"
     t.inet "registration_ip"
     t.bigint "user_id"
     t.datetime "created_at", null: false

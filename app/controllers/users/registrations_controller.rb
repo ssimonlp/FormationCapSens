@@ -63,6 +63,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
   def sign_up_params
     devise_parameter_sanitizer.sanitize(:sign_up)
-    params.require(:user).permit(:email, :password, profile_attributes: %i[first_name last_name dob])
+    params.require(:user).permit(:email, :password, profile_attributes: %i[first_name last_name date_of_birth])
   end
 end
