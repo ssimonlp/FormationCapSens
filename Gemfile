@@ -36,6 +36,7 @@ gem 'rubocop', require: false
 gem 'figaro'
 # Devise
 gem 'devise'
+gem 'dry-transaction'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
