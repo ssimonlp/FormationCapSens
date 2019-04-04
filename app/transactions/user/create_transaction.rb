@@ -5,7 +5,7 @@ class User::CreateTransaction
   
   tee :init
   step :create
-  step :notify
+  tee :notify
 
   def init(input)
     @email = input[:email]
@@ -21,12 +21,11 @@ class User::CreateTransaction
       @user.save!
       Success(input)
     else
-      Failure(@user.errors)
+      Failure(input.merge(errors: @user.errors.messages))
     end
   end
 
   def notify(input)
     @user.send_confirmation_instructions
-    Success(input)
   end
 end
