@@ -7,7 +7,7 @@ class User::CreateTransaction
 
   tee :params
   step :new
-  tee :create
+  tee :save
   tee :notify
   
   def params(input)
@@ -23,8 +23,9 @@ class User::CreateTransaction
     end
   end
 
-  def create(input)
-      @user.save!
+  def save(input)
+      @user.skip_confirmation!
+      @user.save
   end
 
   def notify(input)

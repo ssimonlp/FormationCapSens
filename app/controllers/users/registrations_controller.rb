@@ -18,7 +18,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       flash[:notice] = "A confirmation email has been sent"
       redirect_to new_user_session_path
     else
-      flash[:error] = create_user.result[:errors]
+      flash[:alert] = create_user.failure[:errors].first.flatten.join(" ").to_s
+      redirect_to new_user_registration_path
     end
   end
 
