@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require "dry/transaction"
 
 class User::CreateTransaction
   include Dry::Transaction
-  
+
   tee :init
   step :create
   tee :notify
@@ -16,7 +18,7 @@ class User::CreateTransaction
   end
 
   def create(input)
-    @user = User.new(email: @email, password: @password, profile_attributes: { first_name: @first_name, last_name: @last_name, date_of_birth: @date_of_birth})
+    @user = User.new(email: @email, password: @password, profile_attributes: { first_name: @first_name, last_name: @last_name, date_of_birth: @date_of_birth })
     if @user.valid?
       @user.save!
       Success(input)
@@ -25,7 +27,7 @@ class User::CreateTransaction
     end
   end
 
-  def notify(input)
+  def notify(_input)
     @user.send_confirmation_instructions
   end
 end
