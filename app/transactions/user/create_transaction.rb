@@ -9,11 +9,11 @@ class User::CreateTransaction
   step :new
   tee :save
   tee :notify
-  
+
   def params(input)
     @params = input.fetch(:params)
   end
-  
+
   def new(input)
     @user = User.new(@params)
     if @user.valid?
@@ -23,12 +23,12 @@ class User::CreateTransaction
     end
   end
 
-  def save(input)
-      @user.skip_confirmation!
-      @user.save
+  def save(_input)
+    @user.skip_confirmation!
+    @user.save
   end
 
-  def notify(input)
+  def notify(_input)
     @user.send_confirmation_instructions
   end
 end

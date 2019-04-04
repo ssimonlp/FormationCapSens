@@ -5,14 +5,14 @@ require 'rails_helper'
 RSpec.describe User::CreateTransaction do
   describe 'database' do
     subject { described_class.new.call(params: params) }
-    
+
     context 'with valid params' do
       let(:params) do
         attributes_for(:user).merge(
           profile_attributes: attributes_for(:profile)
         )
       end
-      
+
       it 'creates a user' do
         expect { subject }.to change(User, :count).by(+1)
       end
@@ -30,7 +30,7 @@ RSpec.describe User::CreateTransaction do
           profile_attributes: attributes_for(:profile)
         )
       end
-      
+
       it 'does not save the user' do
         expect { subject }.not_to change(User, :count)
       end
@@ -48,7 +48,7 @@ RSpec.describe User::CreateTransaction do
           profile_attributes: attributes_for(:wrong_profile)
         )
       end
-     
+
       it 'does not save the profile' do
         expect { subject }.not_to change(Profile, :count)
       end
