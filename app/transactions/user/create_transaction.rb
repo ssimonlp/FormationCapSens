@@ -27,7 +27,7 @@ class User::CreateTransaction
     end
   end
 
-  def notify(input)
+  def notify(_input)
     @user.send_confirmation_instructions
   end
 end
