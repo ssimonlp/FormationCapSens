@@ -24,7 +24,7 @@ class User::CreateTransaction
   end
 
   def save(_input)
-    @user.skip_confirmation!
+    @user.skip_confirmation_notification!
     @user.save
   end
 
