@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  include OnlyUsers
 
-  def show; end
+  def show
+    authenticate_user!
+  end
 end
