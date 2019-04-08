@@ -12,9 +12,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    create_user = User::CreateTransaction.new.call(params: sign_up_params)
+    if create_user.success?
+      flash[:notice] = "A confirmation email has been sent"
+      redirect_to new_user_session_path
+    else
+      flash[:alert] = create_user.failure[:errors].first.flatten.join(" ")
+      redirect_to new_user_registration_path
+    end
+  end
 
   # GET /resource/edit
   # def edit

@@ -5,26 +5,27 @@ require "dry/transaction"
 class User::CreateTransaction
   include Dry::Transaction
 
-  tee :init
-  step :create
+  tee :params
+  step :new
+  tee :save
   tee :notify
 
-  def init(input)
-    @email = input[:email]
-    @password = input[:password]
-    @first_name = input[:profile_attributes][:first_name]
-    @last_name = input[:profile_attributes][:last_name]
-    @date_of_birth = input[:profile_attributes][:date_of_birth]
+  def params(input)
+    @params = input.fetch(:params)
   end
 
-  def create(input)
-    @user = User.new(email: @email, password: @password, profile_attributes: { first_name: @first_name, last_name: @last_name, date_of_birth: @date_of_birth })
+  def new(input)
+    @user = User.new(@params)
     if @user.valid?
-      @user.save!
       Success(input)
     else
       Failure(input.merge(errors: @user.errors.messages))
     end
+  end
+
+  def save(_input)
+    @user.skip_confirmation!
+    @user.save
   end
 
   def notify(_input)
