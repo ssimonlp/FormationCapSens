@@ -10,39 +10,38 @@
 User.destroy_all
 AdminUser.destroy_all
 
-#seed admin
+# seed admin
 puts "Seeding Admins..."
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
-#seed confirmed users/profiles
+# seed confirmed users/profiles
 puts "Seeding confirmed users..."
 10.times do |i|
-   user_i = User.new(
-    email: "user#{i}@email.com", 
-    password: '123456', password_confirmation: '123456', 
+  user_i = User.new(
+    email: "user#{i}@email.com",
+    password: '123456', password_confirmation: '123456',
     profile_attributes: {
-      first_name: Faker::Name.first_name, 
-      last_name: Faker::Name.last_name, 
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
       date_of_birth: Faker::Date.birthday(18, 65)
     }
-   )
+  )
   user_i.skip_confirmation!
   user_i.save
 end
 
-#seed unconfirmed users
+# seed unconfirmed users
 puts "seeding unconfirmed users"
 5.times do |i|
   user_i = User.new(
-    email: "user#{i + 10}@email.com", 
-    password: '123456', password_confirmation: '123456', 
+    email: "user#{i + 10}@email.com",
+    password: '123456', password_confirmation: '123456',
     profile_attributes: {
-      first_name: Faker::Name.first_name, 
-      last_name: Faker::Name.last_name, 
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
       date_of_birth: Faker::Date.birthday(18, 65)
     }
-   )
+  )
   user_i.skip_confirmation_notification!
   user_i.save
 end
-
