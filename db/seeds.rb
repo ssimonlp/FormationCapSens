@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'factory_bot_rails'
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -12,36 +14,18 @@ AdminUser.destroy_all
 
 # seed admin
 puts "Seeding Admins..."
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
 # seed confirmed users/profiles
 puts "Seeding confirmed users..."
-10.times do |i|
-  user_i = User.new(
-    email: "user#{i}@email.com",
-    password: '123456', password_confirmation: '123456',
-    profile_attributes: {
-      first_name: Faker::Name.first_name,
-      last_name: Faker::Name.last_name,
-      date_of_birth: Faker::Date.birthday(18, 65)
-    }
-  )
-  user_i.skip_confirmation!
-  user_i.save
+10.times do
+    FactoryBot.create :confirmed_user
 end
 
 # seed unconfirmed users
-puts "seeding unconfirmed users"
+puts "seeding unconfirmed users..."
 5.times do |i|
-  user_i = User.new(
-    email: "user#{i + 10}@email.com",
-    password: '123456', password_confirmation: '123456',
-    profile_attributes: {
-      first_name: Faker::Name.first_name,
-      last_name: Faker::Name.last_name,
-      date_of_birth: Faker::Date.birthday(18, 65)
-    }
-  )
+  user_i = FactoryBot.build :user
   user_i.skip_confirmation_notification!
   user_i.save
 end
