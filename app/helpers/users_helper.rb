@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UsersHelper
   def user_state(user)
     if user_signed_in?

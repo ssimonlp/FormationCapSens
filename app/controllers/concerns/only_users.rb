@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OnlyUsers
   extend ActiveSupport::Concern
   included do
