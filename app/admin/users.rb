@@ -12,7 +12,7 @@ ActiveAdmin.register User do
 #   permitted
 # end
 
-  permit_params :email, :password, :password_confirmation, profile_attributes: %i[first_name last_name date_of_birth]
+  permit_params :email, :password, :password_confirmation, profile_attributes: %i[id first_name last_name date_of_birth]
 
   index do
     selectable_column
@@ -65,12 +65,12 @@ ActiveAdmin.register User do
   end
 
   controller do
-    def updated
-      @user = User.find(params[:id])
+    def update
+      @user = User.find(permitted_params[:id])
       if params[:user][:password].blank?
-        @user.update_without_password(params[:user])
+        @user.update_without_password(permitted_params[:user])
       else
-        @user.update_attributes(params[:user])
+        @user.update_attributes(permitted_params[:user])
       end
       if @user.errors.blank?
         redirect_to admin_users_path, :notice => "User updated successfully."
@@ -83,7 +83,14 @@ ActiveAdmin.register User do
   form do |f|
     f.inputs do
       f.input :email
-      f.input :profile_last_name
+      f.input :password
+      f.input :password_confirmation
     end
+    f.inputs for: [:profile, (f.object.profile || f.object.build_profile)] do |p|
+      p.input :last_name
+      p.input :first_name
+      p.input :date_of_birth
+    end
+    f.actions
   end
 end
