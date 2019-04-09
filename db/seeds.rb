@@ -19,12 +19,12 @@ AdminUser.create(email: 'admin@example.com', password: 'password', password_conf
 # seed confirmed users/profiles
 puts "Seeding confirmed users..."
 10.times do
-    FactoryBot.create :confirmed_user
+  FactoryBot.create :confirmed_user
 end
 
 # seed unconfirmed users
 puts "seeding unconfirmed users..."
-5.times do |i|
+5.times do |_i|
   user_i = FactoryBot.build :user
   user_i.skip_confirmation_notification!
   user_i.save
