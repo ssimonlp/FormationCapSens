@@ -18,7 +18,7 @@ ActiveAdmin.register AdminUser do
 
   form do |f|
     f.inputs do
-      unless !f.object.new_record?
+      if f.object.new_record?
         f.input :email
       end
       f.input :password
