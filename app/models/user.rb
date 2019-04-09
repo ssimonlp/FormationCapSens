@@ -11,6 +11,5 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :profile, allow_destroy: true
 
   validates :profile, presence: true
-  validates :password_confirmation, presence: true
   validates_associated :profile
 end
