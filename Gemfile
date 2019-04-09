@@ -35,6 +35,7 @@ gem 'rubocop', require: false
 # Encrypts data
 gem 'figaro'
 # Devise
+gem 'activeadmin'
 gem 'devise'
 gem 'dry-transaction'
 gem 'jquery-rails'
