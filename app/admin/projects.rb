@@ -45,6 +45,9 @@ ActiveAdmin.register Project do
       row :category do |project|
         project.category.name
       end
+      row "Image" do |project|
+        image_tag project.image_url(:landscape)
+      end
     end
   end
 end

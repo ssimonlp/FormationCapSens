@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2019_04_09_143450) do
     t.text "short_description"
     t.text "long_description"
     t.float "goal"
-    t.string "image_data"
+    t.text "image_data"
     t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -5,7 +5,7 @@ class CreateProjects < ActiveRecord::Migration[5.2]
       t.text :short_description
       t.text :long_description
       t.float :goal
-      t.string :image_data
+      t.text :image_data
       t.belongs_to :category, index: true
       t.timestamps
     end
