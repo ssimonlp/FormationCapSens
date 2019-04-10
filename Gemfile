@@ -39,6 +39,11 @@ gem 'activeadmin'
 gem 'devise'
 gem 'dry-transaction'
 gem 'jquery-rails'
+# Shrine Dependencies
+gem 'fastimage'
+gem 'image_processing'
+gem 'mini_magick'
+gem 'shrine'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
