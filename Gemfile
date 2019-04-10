@@ -69,6 +69,7 @@ group :development do
   gem 'letter_opener_web', '~> 1.0'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'annotate'
 end
 
 group :test do

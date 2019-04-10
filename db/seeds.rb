@@ -32,15 +32,14 @@ puts "seeding unconfirmed users..."
   user_i.save
 end
 
-#seed categories
+# seed categories
 puts "seeding categories ..."
-10.times do
+5.times do
   FactoryBot.create :category
 end
 
-#seed projects
+# seed projects
 puts "seeding projects..."
-20.times do
+10.times do
   FactoryBot.create :project
 end
-
