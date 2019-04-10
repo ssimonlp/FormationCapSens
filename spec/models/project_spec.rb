@@ -15,7 +15,6 @@
 #  updated_at        :datetime         not null
 #
 
-
 require 'rails_helper'
 
 RSpec.describe Project, type: :model do
@@ -38,7 +37,7 @@ RSpec.describe Project, type: :model do
     end
 
     context 'when testing validation' do
-      it { is_expected.to validate_presence_of(:goal)}
+      it { is_expected.to validate_presence_of(:goal) }
       it { is_expected.to validate_numericality_of(:goal).is_greater_than(0) }
       it { is_expected.to validate_presence_of(:name) }
       it { is_expected.to validate_uniqueness_of(:name) }

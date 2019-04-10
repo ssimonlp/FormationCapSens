@@ -15,7 +15,6 @@
 #  updated_at        :datetime         not null
 #
 
-
 FactoryBot.define do
   factory :project do
     name { Faker::TvShows::SiliconValley.unique.company }

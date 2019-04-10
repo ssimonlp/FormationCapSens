@@ -14,7 +14,6 @@
 #  updated_at      :datetime         not null
 #
 
-
 FactoryBot.define do
   factory :profile do
     first_name { Faker::Name.first_name }
