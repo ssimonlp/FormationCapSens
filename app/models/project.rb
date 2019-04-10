@@ -15,13 +15,14 @@
 #  updated_at        :datetime         not null
 #
 
+
 class Project < ApplicationRecord
   belongs_to :category
 
   validates :name, presence: true, uniqueness: true, case_sensitive: false, format: { with: /\A[\x20-\x7E]+\z/, message: "Only alpha-numeric characters" }, length: { in: 3..30 }
-  validates :goal, presence: true, numericality: { greater_than: 0 }
-  validates :short_description, length: { in: 10..200 }
-  validates :long_description, length: { in: 100..600 }
+  validates :goal, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :short_description, length: { in: 10..200 }, allow_blank: true
+  validates :long_description, length: { in: 100..600 }, allow_blank: true
 
   include ImageUploader::Attachment.new(:image)
 end
