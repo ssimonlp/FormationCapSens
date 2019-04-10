@@ -11,6 +11,8 @@ require 'factory_bot_rails'
 #   Character.create(name: 'Luke', movie: movies.first)
 User.destroy_all
 AdminUser.destroy_all
+Category.destroy_all
+Project.destroy_all
 
 # seed admin
 puts "Seeding Admins..."
@@ -29,3 +31,16 @@ puts "seeding unconfirmed users..."
   user_i.skip_confirmation_notification!
   user_i.save
 end
+
+#seed categories
+puts "seeding categories ..."
+10.times do
+  FactoryBot.create :category
+end
+
+#seed projects
+puts "seeding projects..."
+20.times do
+  FactoryBot.create :project
+end
+
