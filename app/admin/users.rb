@@ -74,13 +74,13 @@ ActiveAdmin.register User do
 
   controller do
     def update
-      @user = User.find(permitted_params[:id])
+      @user = resource
       if params[:user][:password].blank?
         @user.update_without_password(permitted_params[:user])
       else
         @user.update(permitted_params[:user])
       end
-      if @user.errors.blank?
+      if @user.valid?
         redirect_to admin_users_path, notice: "User updated successfully."
       else
         render :edit
@@ -89,7 +89,7 @@ ActiveAdmin.register User do
   end
 
   member_action :login_as, method: :get do
-    @user = User.find(params[:id])
+    @user = resource
     bypass_sign_in @user
     redirect_to my_dashboard_path(@user)
   end
