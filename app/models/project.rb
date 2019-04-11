@@ -17,6 +17,8 @@
 
 class Project < ApplicationRecord
   belongs_to :category
+  has_many :contributions
+  has_many :users, through: :contributions
 
   validates :name, presence: true, uniqueness: true, case_sensitive: false, format: { with: /\A[\x20-\x7E]+\z/, message: "Only alpha-numeric characters" }, length: { in: 3..30 }
   validates :goal, presence: true, numericality: { greater_than_or_equal_to: 0 }
