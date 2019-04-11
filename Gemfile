@@ -39,6 +39,11 @@ gem 'activeadmin'
 gem 'devise'
 gem 'dry-transaction'
 gem 'jquery-rails'
+# Shrine Dependencies
+gem 'fastimage'
+gem 'image_processing'
+gem 'mini_magick'
+gem 'shrine'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -53,6 +58,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '~> 4.0'
   gem 'faker', '~> 1.8', '>= 1.8.7'
+  gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.7', '>= 3.7.2'
 end
 
@@ -61,6 +67,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'annotate'
   gem 'letter_opener_web', '~> 1.0'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
