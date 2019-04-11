@@ -6,7 +6,7 @@ RSpec.describe Admin::ProjectsController, type: :controller do
   let(:category) { create(:category) }
 
   let(:valid_attributes) do
-    attributes_for(:project).merge(category_id: category.id)
+    attributes_for(:project, category_id: category.id)
   end
 
   let(:invalid_attributes) do
