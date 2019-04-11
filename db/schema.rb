@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2019_04_11_141806) do
   create_table "counterparts", force: :cascade do |t|
     t.string "name"
     t.text "descrition"
+    t.integer "stock"
     t.bigint "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
