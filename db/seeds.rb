@@ -41,5 +41,5 @@ end
 # seed projects
 puts "seeding projects..."
 10.times do
-  FactoryBot.create :project
+  FactoryBot.create :complete_project
 end

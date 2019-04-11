@@ -15,7 +15,6 @@
 #  updated_at        :datetime         not null
 #
 
-
 class Project < ApplicationRecord
   belongs_to :category
 

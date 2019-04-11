@@ -90,6 +90,7 @@ GEM
       nokogiri (~> 1.8)
     codeclimate-engine-rb (0.4.1)
       virtus (~> 1.0)
+    coderay (1.1.2)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     coffee-rails (4.2.2)
@@ -237,6 +238,12 @@ GEM
       ast (~> 2.4.0)
     path_expander (1.0.3)
     pg (1.1.4)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-byebug (3.7.0)
+      byebug (~> 11.0)
+      pry (~> 0.10)
     psych (3.1.0)
     public_suffix (3.0.3)
     puma (3.12.1)
@@ -415,6 +422,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   mini_magick
   pg (>= 0.18, < 2.0)
+  pry-byebug
   puma (~> 3.11)
   rails (~> 5.2.3)
   rspec-rails (~> 3.7, >= 3.7.2)

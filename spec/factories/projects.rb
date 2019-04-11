@@ -17,11 +17,27 @@
 
 FactoryBot.define do
   factory :project do
-    name { Faker::TvShows::SiliconValley.unique.company }
-    short_description { Faker::TvShows::MichaelScott.quote }
-    long_description { Faker::Lorem.paragraph(10) }
+    name { Faker::Device.unique.model_name }
     goal { Faker::Number.number(6) }
-    image { open(Dir[Rails.root.join('spec', 'fixtures', 'images', '*')].sample) }
     category
+
+    trait :image do
+      image { open(Dir[Rails.root.join('spec', 'fixtures', 'images', '*')].sample) }
+    end
+
+    trait :short_description do
+      short_description { Faker::Lorem.paragraph(3) }
+    end
+
+    trait :long_description do
+      long_description { Faker::Lorem.paragraph(10) }
+    end
+
+    trait :missing_name do
+      name { "" }
+    end
+
+    factory :invalid_project, traits: %i[missing_name]
+    factory :complete_project, traits: %i[image short_description long_description]
   end
 end
