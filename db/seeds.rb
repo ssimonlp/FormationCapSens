@@ -33,3 +33,9 @@ end
 # seed projects
 puts "seeding projects..."
 FactoryBot.create_list(:complete_project, 10)
+
+#seed contributing users
+puts "seeding contributing users"
+FactoryBot.create_list(:contributing_user, 10)
+
+

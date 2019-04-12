@@ -13,6 +13,14 @@
 
 FactoryBot.define do
   factory :contribution do
-    
+    value { Faker::Number.between(1, 1000) }
+    user
+    project
+
+    trait :with_counterpart do
+      counterpart
+    end
+
+    factory :complete_contribution, traits: %i[with_counterpart]
   end
 end

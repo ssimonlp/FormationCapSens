@@ -13,10 +13,9 @@
 
 FactoryBot.define do
   factory :counterpart do
-    name { Faker::Appliance.unique.equipment }
-    description { Faker::TvShows::SiliconValley.unique.quote }
+  name { Faker::Appliance.unique.equipment }
+    description { Faker::TvShows::MichaelScott.quote }
     stock { rand(100) + 1 }
-    project_id { rand(Project.first.id..Project.last.id) }
-    user_id { rand(User.first.id..User.last.id) }
+    association :project, factory: :project
   end
 end
