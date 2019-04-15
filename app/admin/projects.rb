@@ -49,16 +49,16 @@ ActiveAdmin.register Project do
         project.category.name
       end
       row "Collected" do |project|
-        project.contributions.empty? ? "Nobody contributed yet." : "#{project.collected[0]}$"
+        ProjectDecorator.new(project).collect
       end
       row "Progress" do |project|
-        project.contributions.empty? ? "Nobody contributed yet." : "#{project.collected[1]}%"
+        ProjectDecorator.new(project).progress
       end
-      row "Highest"do |project|
-        project.contributions.empty? ? "Nobody contributed yet." : "#{project.rank[1]}$"
+      row "Highest" do |project|
+        ProjectDecorator.new(project).highest
       end
-      row "Lowest"do |project|
-        project.contributions.empty? ? "Nobody contributed yet." : "#{project.rank[0]}$"
+      row "Lowest" do |project|
+        ProjectDecorator.new(project).lowest
       end
       row "Image" do |project|
         project.image.present? ? (image_tag project.image_url(:landscape)) : "No image available yet."
@@ -72,12 +72,8 @@ ActiveAdmin.register Project do
         row "Amount" do |c|
           "#{c.value}$"
         end
-        row "Counterpart" do |c|
-          c.counterpart
-        end
-        row "Date" do |c|
-          c.created_at
-        end
+        row "Counterpart", &:counterpart
+        row "Date", &:created_at
       end
     end
   end
