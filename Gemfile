@@ -40,6 +40,7 @@ gem 'devise'
 gem 'dry-transaction'
 gem 'jquery-rails'
 # Shrine Dependencies
+gem 'draper'
 gem 'fastimage'
 gem 'image_processing'
 gem 'mini_magick'
