@@ -15,4 +15,15 @@ class Contribution < ApplicationRecord
   belongs_to :user
   belongs_to :project
   belongs_to :counterpart, optional: true
+  
+  #validates :user_id, uniqueness: true
+
+  def contributor
+    User.find(self.user_id).profile.first_name + " " + User.find(self.user_id).profile.last_name
+  end
+
+  def counterpart
+    counterpart = Counterpart.find(self.counterpart_id)
+    counterpart.nil? ? "No counterpart selected." : counterpart.name
+  end
 end

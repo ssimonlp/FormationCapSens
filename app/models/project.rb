@@ -27,4 +27,12 @@ class Project < ApplicationRecord
   validates :long_description, length: { in: 100..600 }, allow_blank: true
 
   include ImageUploader::Attachment.new(:image)
+
+  def collected
+    [sum = contributions.collect(&:value).reduce(:+), (sum / goal * 100).round(2)]
+  end
+
+  def rank
+    contributions.collect(&:value).sort!.values_at(0, -1)
+  end
 end

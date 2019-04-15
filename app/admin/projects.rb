@@ -23,12 +23,12 @@ ActiveAdmin.register Project do
   index do
     selectable_column
     id_column
-    column :name
-    column :short_description
-    column :goal
     column "Image" do |project|
       project.image.present? ? (image_tag project.image_url(:thumb)) : "No image available yet."
     end
+    column :name
+    column :short_description
+    column :goal
     column :created_at
     actions
   end
@@ -48,8 +48,36 @@ ActiveAdmin.register Project do
       row :category do |project|
         project.category.name
       end
+      row "Collected" do |project|
+        project.contributions.empty? ? "Nobody contributed yet." : "#{project.collected[0]}$"
+      end
+      row "Progress" do |project|
+        project.contributions.empty? ? "Nobody contributed yet." : "#{project.collected[1]}%"
+      end
+      row "Highest"do |project|
+        project.contributions.empty? ? "Nobody contributed yet." : "#{project.rank[1]}$"
+      end
+      row "Lowest"do |project|
+        project.contributions.empty? ? "Nobody contributed yet." : "#{project.rank[0]}$"
+      end
       row "Image" do |project|
         project.image.present? ? (image_tag project.image_url(:landscape)) : "No image available yet."
+      end
+    end
+    panel "Contributions" do
+      attributes_table_for project.contributions do
+        row "Contributors" do |c|
+          link_to c.contributor, "/admin/users/#{c.user_id}"
+        end
+        row "Amount" do |c|
+          "#{c.value}$"
+        end
+        row "Counterpart" do |c|
+          c.counterpart
+        end
+        row "Date" do |c|
+          c.created_at
+        end
       end
     end
   end
