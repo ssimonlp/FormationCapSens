@@ -12,6 +12,6 @@
 
 FactoryBot.define do
   factory :category do
-    name { Faker::TvShows::GameOfThrones.house }
+    name { Faker::TvShows::GameOfThrones.unique.house }
   end
 end

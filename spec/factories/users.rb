@@ -43,7 +43,7 @@ FactoryBot.define do
 
     trait :with_contributions do
       after :create do |user, evaluator|
-        user.contributions << create_list(:complete_contribution, 5, user: user, project: evaluator.project, counterpart: evaluator.project.counterparts.sample)
+        user.contributions << create(:complete_contribution, user: user, project: evaluator.project, counterpart: evaluator.project.counterparts.sample)
       end
     end
 
