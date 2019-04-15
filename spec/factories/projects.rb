@@ -36,9 +36,9 @@ FactoryBot.define do
     trait :missing_name do
       name { "" }
     end
-    
+
     trait :with_counterparts do
-      after :create  do |project|
+      after :create do |project|
         project.counterparts << create_list(:counterpart, 5, project: project)
       end
     end

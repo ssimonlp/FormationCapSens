@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: counterparts
@@ -13,9 +15,9 @@
 
 FactoryBot.define do
   factory :counterpart do
-  name { Faker::Appliance.unique.equipment }
+    name { Faker::Appliance.unique.equipment }
     description { Faker::TvShows::MichaelScott.quote }
-    stock { rand(100) + 1 }
+    stock { rand(1..100) }
     association :project, factory: :project
   end
 end

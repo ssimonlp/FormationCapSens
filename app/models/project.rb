@@ -17,8 +17,8 @@
 
 class Project < ApplicationRecord
   belongs_to :category
-  has_many :contributions
-  has_many :counterparts
+  has_many :contributions, dependent: :destroy
+  has_many :counterparts, dependent: :destroy
   has_many :users, through: :contributions
 
   validates :name, presence: true, uniqueness: true, case_sensitive: false, format: { with: /\A[\x20-\x7E]+\z/, message: "Only alpha-numeric characters" }, length: { in: 3..30 }

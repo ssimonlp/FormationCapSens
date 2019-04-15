@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: counterparts
@@ -13,5 +15,5 @@
 
 class Counterpart < ApplicationRecord
   belongs_to :project
-  has_many :contributions
+  has_many :contributions, dependent: :destroy
 end
