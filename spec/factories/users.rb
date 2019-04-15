@@ -30,7 +30,7 @@ FactoryBot.define do
     association :profile, strategy: :build
 
     transient do
-      project { Project.all.nil? ? :project : Project.find(Kernel.rand(Project.first.id..Project.last.id)) }
+      project { Project.all.sample }
     end
 
     trait :confirmed do

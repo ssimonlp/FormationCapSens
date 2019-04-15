@@ -38,7 +38,7 @@ RSpec.describe Project, type: :model do
 
     context 'when testing validation' do
       it { is_expected.to validate_presence_of(:goal) }
-      it { is_expected.to validate_numericality_of(:goal).is_greater_than_or_equal_to(0) }
+      it { is_expected.to validate_numericality_of(:goal).is_greater_than(0) }
       it { is_expected.to validate_presence_of(:name) }
       it { is_expected.to validate_uniqueness_of(:name) }
       it { is_expected.to allow_value("Super Objet").for(:name) }
