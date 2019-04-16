@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Category do
+ActiveAdmin.register Counterpart do
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -13,28 +13,22 @@ ActiveAdmin.register Category do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  menu priority: 4
 
-  menu priority: 3
+  permit_params :name,
+                :price,
+                :description,
+                :stock,
+                :project_id
 
-  permit_params :name
-
-  index do
-    selectable_column
-    id_column
-    column :name
-    column :created_at
-    actions
-  end
-
-  filter :name, as: :string
-  filter :created_at, as: :date_range
-  filter :updated_at, as: :date_range
-
-  show do
-    attributes_table do
-      row :name
-      row :created_at
-      row :updated_at
+  form do |f|
+    f.inputs do
+      f.input :project, collection: Project.pluck(:name, :id), selected: (f.object.project_id || params[:project_id])
+      f.input :name
+      f.input :price, min: 1
+      f.input :description
+      f.input :stock, min: 0
     end
+    f.actions
   end
 end

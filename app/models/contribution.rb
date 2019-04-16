@@ -19,7 +19,7 @@ class Contribution < ApplicationRecord
   belongs_to :counterpart, optional: true
 
   validates :value, presence: true, numericality: { greater_than: 0 }
-  validates_uniqueness_of :user_id, scope: :project_id, message: "You can\'t contribute to the same project twice."
+  validates :user_id, uniqueness: { scope: :project_id, message: "You can\'t contribute to the same project twice." }
 
   def contributor
     user.profile.first_name + " " + user.profile.last_name
