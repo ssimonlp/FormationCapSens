@@ -40,6 +40,7 @@ gem 'devise'
 gem 'dry-transaction'
 gem 'jquery-rails'
 # Shrine Dependencies
+gem 'draper'
 gem 'fastimage'
 gem 'image_processing'
 gem 'mini_magick'
@@ -68,6 +69,8 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'annotate'
+  gem "better_errors"
+  gem 'binding_of_caller'
   gem 'letter_opener_web', '~> 1.0'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

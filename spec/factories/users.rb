@@ -29,6 +29,10 @@ FactoryBot.define do
     password { Faker::Internet.password(8, 10) }
     association :profile, strategy: :build
 
+    transient do
+      project { Project.all.sample }
+    end
+
     trait :confirmed do
       confirmed_at { Time.zone.now }
     end
@@ -37,7 +41,14 @@ FactoryBot.define do
       email { "hey" }
     end
 
+    trait :with_contributions do
+      after :create do |user, evaluator|
+        user.contributions << create(:complete_contribution, user: user, project: evaluator.project, counterpart: evaluator.project.counterparts.sample)
+      end
+    end
+
     factory :confirmed_user, traits: %i[confirmed]
     factory :wrong_user, traits: %i[wrong_email confirmed]
+    factory :contributing_user, traits: %i[confirmed with_contributions]
   end
 end

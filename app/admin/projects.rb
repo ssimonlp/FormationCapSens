@@ -13,6 +13,8 @@ ActiveAdmin.register Project do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  decorate_with ProjectDecorator
+
   permit_params :name,
                 :short_description,
                 :long_description,
@@ -23,12 +25,12 @@ ActiveAdmin.register Project do
   index do
     selectable_column
     id_column
-    column :name
-    column :short_description
-    column :goal
     column "Image" do |project|
       project.image.present? ? (image_tag project.image_url(:thumb)) : "No image available yet."
     end
+    column :name
+    column :short_description
+    column :goal
     column :created_at
     actions
   end
@@ -48,8 +50,24 @@ ActiveAdmin.register Project do
       row :category do |project|
         project.category.name
       end
+      row :collected
+      row :progress
+      row :highest
+      row :lowest
       row "Image" do |project|
         project.image.present? ? (image_tag project.image_url(:landscape)) : "No image available yet."
+      end
+    end
+    panel "Contributions" do
+      attributes_table_for project.contributions do
+        row "Contributors" do |c|
+          link_to c.contributor, admin_user_path(c.user)
+        end
+        row "Amount" do |c|
+          "#{c.value}$"
+        end
+        row "Counterpart", &:counterpart_chosen
+        row "Date", &:created_at
       end
     end
   end

@@ -30,6 +30,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable, :trackable
 
   has_one :profile, dependent: :destroy
+  has_many :contributions, dependent: :destroy
+  has_many :projects, through: :contributions
+  has_many :counterparts, through: :contributions
 
   accepts_nested_attributes_for :profile, allow_destroy: true
 

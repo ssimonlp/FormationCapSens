@@ -37,7 +37,12 @@ FactoryBot.define do
       name { "" }
     end
 
+    trait :with_counterparts do
+      after :create do |project|
+        project.counterparts << create_list(:counterpart, 5, project: project)
+      end
+    end
     factory :invalid_project, traits: %i[missing_name]
-    factory :complete_project, traits: %i[image short_description long_description]
+    factory :complete_project, traits: %i[image short_description long_description with_counterparts]
   end
 end
