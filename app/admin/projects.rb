@@ -13,6 +13,9 @@ ActiveAdmin.register Project do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+
+  menu priority: 2
+
   decorate_with ProjectDecorator
 
   permit_params :name,
@@ -20,7 +23,8 @@ ActiveAdmin.register Project do
                 :long_description,
                 :goal,
                 :image,
-                :category_id
+                :category_id,
+                counterparts_attributes: %i[id name price description stock]
 
   index do
     selectable_column
@@ -70,6 +74,13 @@ ActiveAdmin.register Project do
         row "Date", &:created_at
       end
     end
+    panel "Counterparts" do
+      attributes_table_for project.counterparts do
+        row "Type", &:name
+        row "Price", &:price
+        row "Stock", &:stock
+      end
+    end
   end
 
   form do |f|
@@ -77,7 +88,7 @@ ActiveAdmin.register Project do
       f.input :name
       f.input :short_description
       f.input :long_description
-      f.input :goal
+      f.input :goal, min: 0
       f.input :image, as: :file
       f.input :category
     end
