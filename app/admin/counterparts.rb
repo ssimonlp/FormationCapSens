@@ -23,7 +23,7 @@ ActiveAdmin.register Counterpart do
 
   form do |f|
     f.inputs do
-      f.input :project_id, input_html: { value: params[:project_id] }
+      f.input :project, collection: Project.pluck(:name, :id), selected: (f.object.project_id || params[:project_id]), include_blank: false
       f.input :name
       f.input :price, min: 1
       f.input :description
