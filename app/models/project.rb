@@ -16,6 +16,9 @@
 #
 
 class Project < ApplicationRecord
+  include AASM
+  include ImageUploader::Attachment.new(:image)
+
   belongs_to :category
   has_many :contributions, dependent: :destroy
   has_many :counterparts, dependent: :destroy
@@ -26,7 +29,37 @@ class Project < ApplicationRecord
   validates :short_description, length: { in: 10..200 }, allow_blank: true
   validates :long_description, length: { in: 100..600 }, allow_blank: true
 
-  include ImageUploader::Attachment.new(:image)
+  aasm do
+    state :draft, initial: true
+    state :upcoming
+    state :ongoing
+    state :success
+    state :failure
+
+    event :upcome do
+      transitions from: :draft, to: :upcoming, guard: :can_upcome?
+    end
+    
+    event :ongo do
+      transitions from: :upcoming, to: :ongoing, guard: :can_ongo?
+    end
+
+    event :succeed do
+      transitions from: :ongoing, to: :success
+    end
+
+    event :fail do
+      transitions from: :ongoing, to: :failure
+    end
+  end
+
+  def can_upcome?
+    name.present? && short_description.present? && long_description.present? && image.size == 2
+  end
+  
+  def can_ongo?
+    category_id.present? && !counterparts.nil?
+  end
 
   def collect
     [sum = contributions.sum(:value), (sum / goal * 100).round(2)]
