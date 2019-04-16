@@ -35,15 +35,15 @@ end
 # seed contributions
 # je dois passer par ce code pour m'assurer de l'unicité des couples {user, project} dans une contribution
 puts "seeding contributions..."
-#creation de deux arrays contenant les id necessaires
+# creation de deux arrays contenant les id necessaires
 a = *(User.all.first.id..User.all.last.id)
 b = *(Project.all.first.id..Project.all.last.id)
-# produit cartesiene entre les deux arrays 
+# produit cartesiene entre les deux arrays
 combinations = a.product(b).sample(50)
 combinations.each do |c|
   user = User.find(c[0])
   project = Project.find(c[1])
   counterpart = project.counterparts.sample
-# les validations passent grâce à l'unicité des combinaisons
+  # les validations passent grâce à l'unicité des combinaisons
   FactoryBot.create(:complete_contribution, user: user, project: project, counterpart: counterpart)
 end

@@ -45,8 +45,7 @@ ActiveAdmin.register Project do
   filter :category, label: 'Category', as: :select,
                     collection: proc { Category.distinct.pluck :name, :id }
 
-
-  action_item :new_counterpart, only: :show do 
+  action_item :new_counterpart, only: :show do
     link_to 'New Counterpart', new_admin_counterpart_path(project_id: project.id)
   end
 
