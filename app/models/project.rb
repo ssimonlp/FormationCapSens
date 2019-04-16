@@ -36,11 +36,11 @@ class Project < ApplicationRecord
     state :success
     state :failure
 
-    event :upcome do
+    event :start_upcoming do
       transitions from: :draft, to: :upcoming, guard: :can_upcome?
     end
-    
-    event :ongo do
+
+    event :start_ongoing do
       transitions from: :upcoming, to: :ongoing, guard: :can_ongo?
     end
 
@@ -56,7 +56,7 @@ class Project < ApplicationRecord
   def can_upcome?
     name.present? && short_description.present? && long_description.present? && image.size == 2
   end
-  
+
   def can_ongo?
     category_id.present? && !counterparts.nil?
   end

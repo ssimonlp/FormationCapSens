@@ -46,7 +46,7 @@ ActiveAdmin.register Project do
                     collection: proc { Category.distinct.pluck :name, :id }
 
   action_item :new_counterpart, only: :show do
-    link_to 'New Counterpart', new_admin_counterpart_path(project_id: project.id)
+    link_to 'New Counterpart', new_admin_counterpart_path(project_id: project.id) unless (project.may_succeed? || project.may_fail?)
   end
 
   show do
