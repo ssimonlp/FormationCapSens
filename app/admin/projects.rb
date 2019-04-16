@@ -24,7 +24,7 @@ ActiveAdmin.register Project do
                 :goal,
                 :image,
                 :category_id,
-                counterparts_attributes: %i[id name price description stock]
+                counterparts_attributes: %i[id name price description stock project_id]
 
   index do
     selectable_column
@@ -44,6 +44,11 @@ ActiveAdmin.register Project do
   filter :created_at, as: :date_range
   filter :category, label: 'Category', as: :select,
                     collection: proc { Category.distinct.pluck :name, :id }
+
+
+  action_item :new_counterpart, only: :show do 
+    link_to 'New Counterpart', new_admin_counterpart_path(project_id: project.id)
+  end
 
   show do
     attributes_table do
@@ -70,15 +75,23 @@ ActiveAdmin.register Project do
         row "Amount" do |c|
           "#{c.value}$"
         end
-        row "Counterpart", &:counterpart_chosen
+        row "Counterpart" do |c|
+          link_to c.counterpart.name, admin_counterpart_path(c.counterpart)
+        end
         row "Date", &:created_at
       end
     end
     panel "Counterparts" do
       attributes_table_for project.counterparts do
-        row "Type", &:name
+        row "Type" do |ct|
+          link_to ct.name, admin_counterpart_path(ct)
+        end
         row "Price", &:price
         row "Stock", &:stock
+        row "Actions" do |ct|
+          span link_to "Edit", edit_admin_counterpart_path(ct)
+          span link_to "Delete", admin_counterpart_path(ct), method: :delete
+        end
       end
     end
   end

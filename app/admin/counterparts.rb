@@ -11,6 +11,22 @@ ActiveAdmin.register Counterpart do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-  belongs_to :project
-  menu false
+  menu priority: 4
+
+  permit_params :name,
+                :price,
+                :description,
+                :stock,
+                :project_id
+
+  form do |f|
+    f.inputs do
+      f.input :project_id, input_html: { value: params[:project_id] }
+      f.input :name
+      f.input :price, min: 1
+      f.input :description
+      f.input :stock, min: 0
+    end
+    f.actions
+  end
 end
