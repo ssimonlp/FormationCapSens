@@ -45,21 +45,15 @@ class Project < ApplicationRecord
     end
 
     event :succeed do
-      transitions from: :ongoing, to: :success
+      transitions from: :ongoing, to: :success, guard: :completed?
     end
 
     event :fail do
-      transitions from: :ongoing, to: :failure
+      transitions from: :ongoing, to: :failure, guard: -> { !completed? }
     end
   end
 
-  def can_upcome?
-    name.present? && short_description.present? && long_description.present? && image.size == 2
-  end
-
-  def can_ongo?
-    category_id.present? && !counterparts.nil?
-  end
+  scope :pre_ongoing, -> { where(aasm_state: "draft").or(where(aasm_state: "upcoming")) }
 
   def collect
     [sum = contributions.sum(:value), (sum / goal * 100).round(2)]
@@ -67,5 +61,19 @@ class Project < ApplicationRecord
 
   def rank
     contributions.collect(&:value).sort!.values_at(0, -1)
+  end
+
+  def can_upcome?
+    name.present? && short_description.present? && long_description.present? && image.size == 2
+  end
+
+  def can_ongo?
+    category_id.present? && counterparts.any?
+  end
+
+  def completed?
+    return false unless collect[0] >= goal
+
+    true
   end
 end

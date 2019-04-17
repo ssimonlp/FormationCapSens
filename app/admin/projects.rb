@@ -46,7 +46,7 @@ ActiveAdmin.register Project do
                     collection: proc { Category.distinct.pluck :name, :id }
 
   action_item :new_counterpart, only: :show do
-    link_to 'New Counterpart', new_admin_counterpart_path(project_id: project.id) unless (project.ongoing? || project.success? || project.failure?)
+    link_to 'New Counterpart', new_admin_counterpart_path(project_id: project.id) unless project.ongoing? || project.success? || project.failure?
   end
 
   show do
@@ -91,6 +91,22 @@ ActiveAdmin.register Project do
           span link_to "Edit", edit_admin_counterpart_path(ct)
           span link_to "Delete", admin_counterpart_path(ct), method: :delete
         end
+      end
+    end
+  end
+
+  controller do
+    def create
+      create_project = Project::CreateTransaction.new.call(params: permitted_params)
+      if create_project.success?
+        flash[:notice] = "Project was successfully created."
+        redirect_to admin_projects_path
+      else
+        error = create_project.failure[:errors]
+        flash[:alert] = error.class == String ? error : error.first.flatten[0..1].join(" ").capitalize
+        puts permitted_params[:project]
+        puts "--------------------"
+        redirect_to new_admin_project_path(permitted_params[:project])
       end
     end
   end
