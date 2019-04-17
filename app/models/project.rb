@@ -13,6 +13,7 @@
 #  category_id       :bigint(8)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  aasm_state        :string
 #
 
 class Project < ApplicationRecord
@@ -68,7 +69,7 @@ class Project < ApplicationRecord
   end
 
   def can_ongo?
-    category_id.present? && counterparts.any?
+    category_id.present? && (counterparts.size > 1)
   end
 
   def completed?

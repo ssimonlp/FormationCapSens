@@ -22,6 +22,7 @@ ActiveAdmin.register Project do
                 :short_description,
                 :long_description,
                 :goal,
+                :aasm_state,
                 :image,
                 :category_id,
                 counterparts_attributes: %i[id name price description stock project_id]
@@ -35,6 +36,7 @@ ActiveAdmin.register Project do
     column :name
     column :short_description
     column :goal
+    column "State", :aasm_state
     column :created_at
     actions
   end
@@ -42,11 +44,20 @@ ActiveAdmin.register Project do
   filter :name, as: :string
   filter :goal, as: :numeric
   filter :created_at, as: :date_range
+  filter :aasm_state, label: "State", as: :select
   filter :category, label: 'Category', as: :select,
                     collection: proc { Category.distinct.pluck :name, :id }
 
   action_item :new_counterpart, only: :show do
     link_to 'New Counterpart', new_admin_counterpart_path(project_id: project.id) unless project.ongoing? || project.success? || project.failure?
+  end
+
+  action_item :promote_to_success, only: :show do
+    link_to 'Promote to success', promote_to_success_path(id: project.id), method: :post if project.completed? && project.ongoing?
+  end
+
+  action_item :promote_to_failure, only: :show do
+    link_to 'Promote to failure', promote_to_failure_path(id: project.id), method: :post if !project.completed? && project.ongoing?
   end
 
   show do
@@ -55,6 +66,9 @@ ActiveAdmin.register Project do
       row :short_description
       row :long_description
       row :goal
+      row "State" do
+        project.aasm_state
+      end
       row :category do |project|
         project.category.name
       end
@@ -104,9 +118,31 @@ ActiveAdmin.register Project do
       else
         error = create_project.failure[:errors]
         flash[:alert] = error.class == String ? error : error.first.flatten[0..1].join(" ").capitalize
-        puts permitted_params[:project]
-        puts "--------------------"
         redirect_to new_admin_project_path(permitted_params[:project])
+      end
+    end
+
+    def promote_to_success
+      @project = Project.find(params[:id])
+      if @project.may_succeed?
+        @project.succeed!
+        flash[:notice] = "The project has been promoted successfully."
+        redirect_to admin_project_path(@project)
+      else
+        flash[:alert] = "Cannot promote this project."
+        redirect_to admin_projects_path
+      end
+    end
+
+    def promote_to_failure
+      @project = Project.find(params[:id])
+      if @project.may_fail?
+        @project.fail!
+        flash[:notice] = "The project has been promoted successfully."
+        redirect_to admin_project_path(@project)
+      else
+        flash[:alert] = "Cannot promote this project."
+        redirect_to admin_projects_path
       end
     end
   end
