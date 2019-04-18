@@ -13,6 +13,7 @@
 #  category_id       :bigint(8)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  aasm_state        :string
 #
 
 FactoryBot.define do
