@@ -1,22 +1,54 @@
-<section class="slice bg-minimalist">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <img src="<%= @project.image_url(:thumb) %>" alt="img shop" class="pl-5">
+<div class="container" id="product-section">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="gallery">
+        <div id='carousel-custom' class='carousel slide'>
+          <div class='carousel-outer'>
+            <div class='carousel-inner '>
+              <div class='item active'>
+              <%=  image_tag @project.image_url(:landscape)%>
+              </div>
             </div>
-            <div class="col-lg-5 ml-lg-auto">
-                <div class="product-description-wrapper">
-                    <!-- Product title -->
-                    <h2 class="heading heading-4 strong-600 text-capitalize">
-                    <%= @project.name %>
-                    </h2>
-                    <span class="heading heading-light heading-5 strong-600 mt-3">
-                    <%= number_to_currency( @project.goal, :unit=>'$') %>
-                    </span>
-
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
-</section>
-
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="main-title"><%= @project.name %></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p class="description"><%= @project.long_description %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 bottom-rule">
+          <h2 class="product-price">Completion: <%= @project.collect[1] %>%</h2>
+        </div>
+      </div>
+      <div class="row'">
+        <div class="col-md-12">
+        <%= form_for @project, url: new_admin_project_path, method: :post  do |f|%>
+          <div class="row mb-3 mt-2">
+            <div class="col-md-6">
+              <div class="form-group">
+              <%= f.collection_select :counterparts, @project.counterparts, :id, :name, class:"form-control select2"%>
+              </div>
+            </div>
+          </div>
+          <div class="row add-to-cart">
+            <div class="col-md-6">
+            <% if user_signed_in? %>
+              <%=f.submit 'Subscribe',class: "btn btn-outline-success btn-lg" %>
+            <% end %>
+            </div>
+          </div>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
