@@ -54,7 +54,7 @@ class Project < ApplicationRecord
     end
   end
 
-  scope :pre_ongoing, -> { where(aasm_state: "draft").or(where(aasm_state: "upcoming")) }
+  scope :pre_ongoing, -> { draft.or(upcoming) }
 
   def collect
     [sum = contributions.sum(:value), (sum / goal * 100).round(2)]
@@ -65,7 +65,7 @@ class Project < ApplicationRecord
   end
 
   def can_upcome?
-    name.present? && short_description.present? && long_description.present? && image.size == 2
+    name.present? && short_description.present? && long_description.present? && ( !image.nil? && image.size == 2)
   end
 
   def can_ongo?

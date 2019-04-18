@@ -48,16 +48,16 @@ ActiveAdmin.register Project do
   filter :category, label: 'Category', as: :select,
                     collection: proc { Category.distinct.pluck :name, :id }
 
-  action_item :new_counterpart, only: :show do
-    link_to 'New Counterpart', new_admin_counterpart_path(project_id: project.id) unless project.ongoing? || project.success? || project.failure?
+  action_item :new_counterpart, only: :show, unless: proc { project.ongoing? || project.success? || project.failure? } do
+    link_to 'New Counterpart', new_admin_counterpart_path(project_id: project.id)
   end
 
-  action_item :promote_to_success, only: :show do
-    link_to 'Promote to success', promote_to_success_path(id: project.id), method: :post if project.completed? && project.ongoing?
+  action_item :promote_to_success, only: :show, if: proc { project.completed? && project.ongoing? } do
+    link_to 'Promote to success', success_admin_project_path(id: project.id), method: :post
   end
 
-  action_item :promote_to_failure, only: :show do
-    link_to 'Promote to failure', promote_to_failure_path(id: project.id), method: :post if !project.completed? && project.ongoing?
+  action_item :promote_to_failure, only: :sho, if: proc { !project.completed? && project.ongoing? } do
+    link_to 'Promote to failure', failure_admin_project_path(id: project.id), method: :post
   end
 
   show do
@@ -109,6 +109,28 @@ ActiveAdmin.register Project do
     end
   end
 
+  member_action :success, method: :post do
+    if resource.may_succeed?
+      resource.succeed!
+      flash[:notice] = "The project has been promoted successfully."
+      redirect_to admin_project_path(resource)
+    else
+      flash[:alert] = "Cannot promote this project."
+      redirect_to admin_projects_path
+    end
+  end
+
+  member_action :failure, method: :post do
+    if resource.may_fail?
+      resource.fail!
+      flash[:notice] = "The project has been promoted successfully."
+      redirect_to admin_project_path(resource)
+    else
+      flash[:alert] = "Cannot promote this project."
+      redirect_to admin_projects_path
+    end
+  end
+
   controller do
     def create
       create_project = Project::CreateTransaction.new.call(params: permitted_params)
@@ -116,33 +138,9 @@ ActiveAdmin.register Project do
         flash[:notice] = "Project was successfully created."
         redirect_to admin_projects_path
       else
-        error = create_project.failure[:errors]
-        flash[:alert] = error.class == String ? error : error.first.flatten[0..1].join(" ").capitalize
-        redirect_to new_admin_project_path(permitted_params[:project])
-      end
-    end
-
-    def promote_to_success
-      @project = Project.find(params[:id])
-      if @project.may_succeed?
-        @project.succeed!
-        flash[:notice] = "The project has been promoted successfully."
-        redirect_to admin_project_path(@project)
-      else
-        flash[:alert] = "Cannot promote this project."
-        redirect_to admin_projects_path
-      end
-    end
-
-    def promote_to_failure
-      @project = Project.find(params[:id])
-      if @project.may_fail?
-        @project.fail!
-        flash[:notice] = "The project has been promoted successfully."
-        redirect_to admin_project_path(@project)
-      else
-        flash[:alert] = "Cannot promote this project."
-        redirect_to admin_projects_path
+        @project = create_project.failure[:resource]
+        flash[:alert] = create_project.failure[:errors]
+        render :new
       end
     end
   end

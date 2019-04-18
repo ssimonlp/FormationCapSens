@@ -27,13 +27,11 @@ ActiveAdmin.register Counterpart do
       create_counterpart = Counterpart::CreateTransaction.new.call(params: permitted_params)
       if create_counterpart.success?
         flash[:notice] = "Counterpart was successfully created."
-        p permitted_params
-        puts "-----------"
         redirect_to admin_project_path(permitted_params[:counterpart][:project_id])
       else
-        error = create_counterpart.failure[:errors]
-        flash[:alert] = error.class == String ? error : error.first.flatten[0..1].join(" ").capitalize
-        redirect_to new_admin_counterpart_path(permitted_params[:counterpart])
+        @counterpart = create_counterpart.failure[:resource]
+        flash[:alert] = create_counterpart.failure[:errors]
+        render :new
       end
     end
   end

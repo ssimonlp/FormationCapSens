@@ -28,12 +28,12 @@ class Counterpart::CreateTransaction
     if @counterpart.valid?
       Success(input)
     else
-      Failure(input.merge(errors: @counterpart.errors.messages))
+      Failure(input.merge(errors: @counterpart.errors.full_messages.join(', '), resource: @counterpart))
     end
   end
 
   def save(_input)
     @counterpart.save
-    @project.start_ongoing! if @project.can_ongo?
+    @project.start_ongoing! if @project.can_ongo? && @project.upcoming?
   end
 end

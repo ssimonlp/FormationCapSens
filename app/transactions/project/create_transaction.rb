@@ -19,7 +19,7 @@ class Project::CreateTransaction
 
       Success(input)
     else
-      Failure(input.merge(errors: @project.errors.messages))
+      Failure(input.merge(errors: @project.errors.full_messages.join(', '), resource: @project))
     end
   end
 
