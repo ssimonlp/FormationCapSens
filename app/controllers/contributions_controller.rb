@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ContributionsController < ApplicationController
   def create
     create_contribution = Contribution::CreateTransaction.new.call(params: params.merge(user_id: current_user.id))

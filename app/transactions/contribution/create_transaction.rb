@@ -30,4 +30,3 @@ class Contribution::CreateTransaction
     @contribution.save
   end
 end
-
