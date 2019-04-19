@@ -2,14 +2,23 @@
 #
 # Table name: profiles
 #
-#  id              :bigint(8)        not null, primary key
-#  first_name      :string
-#  last_name       :string
-#  date_of_birth   :date
-#  registration_ip :inet
-#  user_id         :bigint(8)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                   :bigint(8)        not null, primary key
+#  first_name           :string
+#  last_name            :string
+#  date_of_birth        :date
+#  address_line1        :string
+#  address_line2        :string
+#  city                 :string
+#  region               :string
+#  postal_code          :string
+#  country              :string
+#  nationality          :string
+#  country_of_residence :string
+#  occupation           :string
+#  income_range         :integer
+#  user_id              :bigint(8)
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
