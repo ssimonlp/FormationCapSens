@@ -3,13 +3,13 @@
 class ContributionsController < ApplicationController
   def create
     @contribution = current_user.contributions.new(contribution_params)
-    create_contribution = Contribution::CreateTransaction.new.call(@contribution)
+    create_contribution = Contribution::CreateTransaction.new.call(params: @contribution)
     if create_contribution.success?
       flash[:notice] = "Contribution was successfully created."
       redirect_to projects_path
     else
-      flash[:alert] = create_contribution.failure.errors.full_messages.join(', ')
-      redirect_to project_path(params[:id])
+      flash[:alert] = create_contribution.failure[:errors]
+      redirect_to projects_path
     end
   end
 
