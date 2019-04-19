@@ -2,14 +2,20 @@
 
 class ContributionsController < ApplicationController
   def create
-    create_contribution = Contribution::CreateTransaction.new.call(params: params.merge(user_id: current_user.id))
+    @contribution = current_user.contributions.new(contribution_params)
+    create_contribution = Contribution::CreateTransaction.new.call(@contribution)
     if create_contribution.success?
       flash[:notice] = "Contribution was successfully created."
       redirect_to projects_path
     else
-      @contribution = create_contribution.failure[:resource]
-      flash[:alert] = create_contribution.failure[:errors]
+      flash[:alert] = create_contribution.failure.errors.full_messages.join(', ')
       redirect_to project_path(params[:id])
     end
+  end
+
+  protected
+
+  def contribution_params
+    params.require(:contribution).permit(:project_id, :counterpart_id)
   end
 end

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'projects/index', to: 'projects#index', as: 'projects'
-  get 'projects/:id/show', to: 'projects#show', as: 'project'
-  post 'projects/:id/show', to: 'contributions#create', as: 'new_contribution'
+  resources :projects
+  resources :contributions, except: :create
+  post 'contributions/:id', to: 'contributions#create', as: 'create_contribution'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   get 'users/show', to: 'users#show', as: 'my_dashboard'

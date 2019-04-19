@@ -6,23 +6,24 @@ class Contribution::CreateTransaction
   include Dry::Transaction
 
   tee :params
+  tee :set_value
   step :new
   tee :save
 
   def params(input)
-    @params = input.fetch(:params)
-    @project_id = @params[:id]
-    @counterpart = Counterpart.find(@params[:project][:counterparts])
-    @user_id = @params[:user_id]
-    @value = @counterpart.price
+    @contribution = input
+  end
+
+  def set_value(_input)
+    @value = @contribution.counterpart.price
+    @contribution.update(value: @value)
   end
 
   def new(input)
-    @contribution = Contribution.new(user_id: @user_id, project_id: @project_id, counterpart_id: @counterpart.id, value: @value )
     if @contribution.valid?
       Success(input)
     else
-      Failure(input.merge(errors: @contribution.errors.full_messages.join(', '), resource: @contribution))
+      Failure(input)
     end
   end
 

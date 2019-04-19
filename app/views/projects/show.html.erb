@@ -31,11 +31,12 @@
       </div>
       <div class="row'">
         <div class="col-md-12">
-        <%= form_for @project, url: new_contribution_path, method: :post  do |f|%>
+        <%= form_for Contribution.new, url: create_contribution_path, method: :post  do |f|%>
           <div class="row mb-3 mt-2">
             <div class="col-md-6">
               <div class="form-group">
-              <%= f.collection_select :counterparts, @project.counterparts, :id, :name, class:"form-control select2"%>
+              <%= f.collection_select :counterpart_id, @project.counterparts, :id, :name_with_price, class:"form-control select2"%>
+              <%= f.hidden_field :project_id, value: @project.id%>
               </div>
             </div>
           </div>
