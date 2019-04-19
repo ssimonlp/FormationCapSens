@@ -2,8 +2,7 @@
 
 Rails.application.routes.draw do
   resources :projects
-  resources :contributions, except: :create
-  post 'contributions/:id', to: 'contributions#create', as: 'create_contribution'
+  resources :contributions
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   get 'users/show', to: 'users#show', as: 'my_dashboard'

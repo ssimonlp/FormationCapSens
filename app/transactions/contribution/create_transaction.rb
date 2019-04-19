@@ -11,19 +11,18 @@ class Contribution::CreateTransaction
   tee :save
 
   def params(input)
-    @contribution = input
+    @contribution = input.fetch(:params)
   end
 
   def set_value(_input)
-    @value = @contribution.counterpart.price
-    @contribution.update(value: @value)
+    @contribution.value = @contribution.counterpart.price
   end
 
   def new(input)
     if @contribution.valid?
       Success(input)
     else
-      Failure(input)
+      Failure(input.merge(errors: @contribution.errors.full_messages.join(', ')))
     end
   end
 
