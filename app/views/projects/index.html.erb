@@ -1,0 +1,22 @@
+<div class="row">
+  <% @projects.each do |project| %>
+    <div class="col-md-3 col-sm-12">
+	  <div class="square-card">
+	    <div class="card-header">
+		  <div class="card-header_overlay">
+			<span class="pill"><%= project.collect[1]%>%</span>
+            <%= image_tag project.image_url(:thumb) %>
+		  </div>
+		</div>
+	    <div class="card-title">
+		  <h4><%= project.aasm_state %></h4>			
+		</div>
+		<div class="cta">
+          <%= link_to "#{project.name}", project_path(project) %>
+		</div>
+	      </a>
+      </div>
+    </div>
+  <% end %>
+</div>
+
