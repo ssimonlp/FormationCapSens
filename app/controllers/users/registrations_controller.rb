@@ -19,7 +19,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       redirect_to new_user_session_path
     else
       respond_to do |format|
-        format.js { flash.now[:alert] = create_user.failure[:errors].first.flatten.join(" ") }
+        format.html
+        format.js { flash.now[:alert] = create_user.failure[:errors] }
       end
     end
   end

@@ -89,6 +89,8 @@ ActiveRecord::Schema.define(version: 2019_04_16_131325) do
     t.string "country_of_residence"
     t.string "occupation"
     t.integer "income_range"
+    t.bigint "mangopay_id"
+    t.bigint "mangopay_wallet_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -16,6 +16,8 @@ class CreateProfiles < ActiveRecord::Migration[5.2]
       t.string :country_of_residence
       t.string :occupation
       t.integer :income_range
+      t.bigint :mangopay_id
+      t.bigint :mangopay_wallet_id
       t.belongs_to :user, index: true
       t.timestamps
     end
