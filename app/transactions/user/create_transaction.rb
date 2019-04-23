@@ -26,36 +26,32 @@ class User::CreateTransaction
   end
 
   def mangopay_user(input)
-    begin
-      response =  MangoPay::NaturalUser.create(mangopay_params)
-      if response['Id']
-        Success(input.merge(mangopay_id: response['Id']))
-      else
-        Failure(input)
-      end
-      rescue MangoPay::ResponseError => e
-        Failure(input.merge(errors: e.errors.to_a.join(": ")))
+    response = MangoPay::NaturalUser.create(mangopay_params)
+    if response['Id']
+      Success(input.merge(mangopay_id: response['Id']))
+    else
+      Failure(input)
     end
+  rescue MangoPay::ResponseError => e
+    Failure(input.merge(errors: e.errors.to_a.join(": ")))
   end
 
   def save(_input)
-    @user.profile.mangopay_id =  _input[:mangopay_id]
+    @user.profile.mangopay_id = _input[:mangopay_id]
     @user.skip_confirmation_notification!
     @user.save
   end
-  
+
   def mangopay_wallet(input)
-    begin
-      response =  MangoPay::Wallet.create({Owners: [input[:mangopay_id]], Currency: 'EUR', Description: "Test wallet"})
-      if response['Id']
-        @user.profile.update(mangopay_wallet_id: response['Id'])
-        Success(input)
-      else
-        Failure(input)
-      end
-      rescue MangoPay::ResponseError => e
-        Failure(input.merge(errors: e.errors.to_a.join(": ")))
+    response = MangoPay::Wallet.create(Owners: [input[:mangopay_id]], Currency: 'EUR', Description: "Test wallet")
+    if response['Id']
+      @user.profile.update(mangopay_wallet_id: response['Id'])
+      Success(input)
+    else
+      Failure(input)
     end
+  rescue MangoPay::ResponseError => e
+    Failure(input.merge(errors: e.errors.to_a.join(": ")))
   end
 
   def notify(_input)

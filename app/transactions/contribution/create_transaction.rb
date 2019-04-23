@@ -28,16 +28,14 @@ class Contribution::CreateTransaction
   end
 
   def payin(input)
-    begin
-      response = MangoPay::PayIn::Card::Web.create(payin_params.merge(AuthorId: @contribution.user.profile.mangopay_id, DebitedFunds: { Currency: 'EUR', Amount: @contribution.counterpart.price }))
-      if response['Id']
-        Success(input)
-      else
-        Failure(input)
-      end
-      rescue MangoPay::ResponseError => e
-      Failure(input.merge(errors: e.errors.to_a.join(': ')))
+    response = MangoPay::PayIn::Card::Web.create(payin_params.merge(AuthorId: @contribution.user.profile.mangopay_id, DebitedFunds: { Currency: 'EUR', Amount: @contribution.counterpart.price }))
+    if response['Id']
+      Success(input)
+    else
+      Failure(input)
     end
+  rescue MangoPay::ResponseError => e
+    Failure(input.merge(errors: e.errors.to_a.join(': ')))
   end
 
   def save(_input)
@@ -49,14 +47,12 @@ class Contribution::CreateTransaction
   def payin_params
     @admin = AdminUser.first
     {
-      CredeitedUserId: 64347949, #Id de l'admin pour l'instant 
-      Fees: { Currency: 'EUR', Amount: 0 }, 
-      CreditedWalletId: 64348317, 
+      CredeitedUserId: 64_347_949, # Id de l'admin pour l'instant
+      Fees: { Currency: 'EUR', Amount: 0 },
+      CreditedWalletId: 64_348_317,
       CardType: 'CB_VISA_MASTERCARD',
       ReturnURL: 'https://localhost:300/',
       Culture: 'FR'
     }
   end
 end
-
-
