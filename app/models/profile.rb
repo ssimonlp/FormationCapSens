@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: profiles
@@ -18,6 +17,8 @@
 #  country_of_residence :string
 #  occupation           :string
 #  income_range         :integer
+#  mangopay_id          :bigint(8)
+#  mangopay_wallet_id   :bigint(8)
 #  user_id              :bigint(8)
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
