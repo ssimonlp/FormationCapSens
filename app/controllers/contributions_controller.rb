@@ -6,7 +6,7 @@ class ContributionsController < ApplicationController
     create_contribution = Contribution::CreateTransaction.new.call(params: @contribution)
     if create_contribution.success?
       flash[:notice] = "Contribution was successfully created."
-      redirect_to projects_path
+      redirect_to create_contribution.success[:redirection]
     else
       flash[:alert] = create_contribution.failure[:errors]
       redirect_to projects_path

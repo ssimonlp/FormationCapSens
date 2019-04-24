@@ -32,4 +32,4 @@
 /spec/examples.txt
 /public/uploads
 /config/database.yml
-/config/application.yml
+/config/credentials.yml.enc

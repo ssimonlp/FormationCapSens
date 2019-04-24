@@ -19,7 +19,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       redirect_to new_user_session_path
     else
       respond_to do |format|
-        format.js { flash.now[:alert] = create_user.failure[:errors].first.flatten.join(" ") }
+        format.html
+        format.js { flash.now[:alert] = create_user.failure[:errors] }
       end
     end
   end
@@ -71,6 +72,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
   def sign_up_params
     devise_parameter_sanitizer.sanitize(:sign_up)
-    params.require(:user).permit(:email, :password, :password_confirmation, profile_attributes: %i[first_name last_name date_of_birth])
+    params.require(:user).permit(:email, :password, :password_confirmation, profile_attributes: %i[first_name last_name date_of_birth address_line1 address_line2 city region postal_code country nationality country_of_residence occupation income_range])
   end
 end

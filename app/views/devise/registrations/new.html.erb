@@ -25,6 +25,55 @@
 		<%= f.label "Date of Birth" %> <br />
 		<%= p.date_select :date_of_birth, order: %i[day month year], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year, end_year: Date.today.year - 100  %>
 	</div>
+      <div class="field mt-3">
+        <%= p.label :address_line_1 %><br />
+        <%= p.text_field :address_line1, class: "form-control" %>
+      </div>
+
+      <div class="field mt-3">
+        <%= p.label :address_line_2 %><br />
+        <%= p.text_field :address_line2, class: "form-control" %>
+      </div>
+
+      <div class="field mt-3">
+        <%= p.label :city %><br />
+        <%= p.text_field :city, class: "form-control" %>
+      </div>
+
+      <div class="field mt-3">
+        <%= p.label :region%> <br />
+        <%= p.text_field :region, class: "form-control" %>
+      </div>
+
+      <div class="field mt-3">
+        <%= p.label :postal_code %> <br />
+        <%= p.text_field :postal_code, class: "form-control" %>
+      </div>
+
+      <div class="field mt-3">
+        <%= p.label :country %><br />
+        <%= p.text_field :country, class: "form-control" %>
+      </div>
+
+      <div class="field mt-3">
+        <%= p.label :nationality %><br />
+        <%= p.text_field :nationality, class: "form-control" %>
+      </div>
+
+      <div class="field mt-3">
+        <%= p.label :country_of_residence %><br />
+        <%= p.text_field :country_of_residence, class: "form-control" %>
+      </div>
+
+      <div class="field mt-3">
+        <%= p.label :occupation %><br />
+        <%= p.text_field :occupation, class: "form-control" %>
+      </div>
+
+      <div class="field mt-3">
+        <%= p.label :income_range %><br />
+        <%= p.number_field :income_range, class: "form-control" %>
+      </div>
 <% end %>
   <div class="field mt-3">
     <%= f.label :password %>

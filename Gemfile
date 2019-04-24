@@ -44,6 +44,7 @@ gem 'aasm'
 gem 'draper'
 gem 'fastimage'
 gem 'image_processing'
+gem 'mangopay'
 gem 'mini_magick'
 gem 'shrine'
 # Use ActiveStorage variant

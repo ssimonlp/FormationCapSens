@@ -6,7 +6,18 @@ class CreateProfiles < ActiveRecord::Migration[5.2]
       t.string :first_name
       t.string :last_name
       t.date :date_of_birth
-      t.inet :registration_ip
+      t.string :address_line1
+      t.string :address_line2
+      t.string :city
+      t.string :region
+      t.string :postal_code
+      t.string :country
+      t.string :nationality
+      t.string :country_of_residence
+      t.string :occupation
+      t.integer :income_range
+      t.bigint :mangopay_id
+      t.bigint :mangopay_wallet_id
       t.belongs_to :user, index: true
       t.timestamps
     end
