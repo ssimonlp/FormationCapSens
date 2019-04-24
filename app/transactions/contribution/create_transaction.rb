@@ -28,7 +28,7 @@ class Contribution::CreateTransaction
   end
 
   def payin(input)
-    response = MangoPay::PayIn::Card::Web.create(payin_params.merge(AuthorId: @contribution.user.profile.mangopay_id, DebitedFunds: { Currency: 'EUR', Amount: @contribution.counterpart.price }))
+    response = MangoPay::PayIn::Card::Web.create(payin_params(@contribution))
     if response['Id']
       Success(input)
     else
@@ -44,10 +44,11 @@ class Contribution::CreateTransaction
 
   protected
 
-  def payin_params
-    @admin = AdminUser.first
+  def payin_params(contribution)
     {
-      CredeitedUserId: 64_347_949, # Id de l'admin pour l'instant
+      AuthorId: contribution.user.profile.mangopay_id,
+      DebitedFunds: { Currency: 'EUR', Amount: contribution.counterpart.price },
+      CreditedUserId: 64_347_949, # Id de l'admin pour l'instant
       Fees: { Currency: 'EUR', Amount: 0 },
       CreditedWalletId: 64_348_317,
       CardType: 'CB_VISA_MASTERCARD',

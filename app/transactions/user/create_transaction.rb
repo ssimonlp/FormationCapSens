@@ -36,8 +36,8 @@ class User::CreateTransaction
     Failure(input.merge(errors: e.errors.to_a.join(": ")))
   end
 
-  def save(_input)
-    @user.profile.mangopay_id = _input[:mangopay_id]
+  def save(input)
+    @user.profile.mangopay_id = input[:mangopay_id]
     @user.skip_confirmation_notification!
     @user.save
   end
@@ -62,26 +62,22 @@ class User::CreateTransaction
 
   def mangopay_params
     {
-      FirstName: @params[:profile_attributes][:first_name],
-      LastName: @params[:profile_attributes][:last_name],
+      FirstName: @user.profile.first_name,
+      LastName: @user.profile.last_name,
       Address: {
-        AddressLine1: @params[:profile_attributes][:address_line1],
-        AddressLine2: @params[:profile_attributes][:address_line2],
-        City: @params[:profile_attributes][:city],
-        Region: @params[:profile_attributes][:region],
-        PostalCode: @params[:profile_attributes][:postal_code],
-        Country: @params[:profile_attributes][:country]
+        AddressLine1: @user.profile.address_line1,
+        AddressLine2: @user.profile.address_line2,
+        City: @user.profile.city,
+        Region: @user.profile.region,
+        PostalCode: @user.profile.postal_code,
+        Country: @user.profile.country
       },
-      Birthday: flatten_date_array(@params[:profile_attributes]),
-      Nationality: @params[:profile_attributes][:nationality],
-      CountryOfResidence: @params[:profile_attributes][:country_of_residence],
-      Occupation: @params[:profile_attributes][:occupation],
-      IncomeRange: @params[:profile_attributes][:income_range],
-      Email: @params[:email]
+      Birthday: @user.profile.date_of_birth.to_time.to_i,
+      Nationality: @user.profile.nationality,
+      CountryOfResidence: @user.profile.country_of_residence,
+      Occupation: @user.profile.occupation,
+      IncomeRange: @user.profile.income_range,
+      Email: @user.email
     }
-  end
-
-  def flatten_date_array(hash)
-    Date.parse(%w(3 2 1).map { |e| hash["date_of_birth(#{e}i)"].to_s }.join('-')).to_time.to_i
   end
 end
