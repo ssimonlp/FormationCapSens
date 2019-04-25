@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: profiles
@@ -29,6 +30,18 @@ FactoryBot.define do
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
     date_of_birth { Faker::Date.birthday(18, 65) }
+    address_line1 { Faker::Address.street_address }
+    address_line2 { Faker::Address.secondary_address }
+    city { Faker::Address.city }
+    region { Faker::Address.state }
+    postal_code { "75010" }
+    country_of_residence { Faker::Address.country_code }
+    nationality { Faker::Address.country_code }
+    country { Faker::Address.country_code }
+    occupation { "worker" }
+    income_range { 2 }
+    mangopay_id { 64_361_581 }
+    mangopay_wallet_id { 64_361_582 }
 
     trait :missing_first_name do
       first_name { "" }
