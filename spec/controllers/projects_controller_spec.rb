@@ -11,8 +11,9 @@ RSpec.describe ProjectsController, type: :controller do
   end
 
   describe "GET #show" do
+    let(:project) { create(:complete_project) }
     it "returns http success" do
-      get :show
+      get :show, params: { id: project.id }
       expect(response).to have_http_status(:success)
     end
   end
