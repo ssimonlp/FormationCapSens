@@ -16,7 +16,9 @@ class Contribution::CreateTransaction
   end
 
   def set_value(_input)
-    @contribution.value = @contribution.counterpart.price
+    if @contribution.value.nil? 
+      @contribution.value = @contribution.counterpart.price
+    end
   end
 
   def new(input)
