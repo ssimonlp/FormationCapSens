@@ -47,6 +47,7 @@ gem 'image_processing'
 gem 'mangopay'
 gem 'mini_magick'
 gem 'shrine'
+gem 'webmock'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -63,6 +64,7 @@ group :development, :test do
   gem 'faker', '~> 1.8', '>= 1.8.7'
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.7', '>= 3.7.2'
+  gem 'vcr'
 end
 
 group :development do

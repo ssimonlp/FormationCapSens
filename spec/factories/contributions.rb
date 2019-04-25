@@ -16,13 +16,18 @@
 FactoryBot.define do
   factory :contribution do
     value { Faker::Number.between(1, 1000) }
-    user
+    association :user, factory: :confirmed_user
     project
 
     trait :with_counterpart do
       counterpart
     end
 
+    trait :wrong_value do
+      value { "" }
+    end
+
+    factory :wrong_contribution, traits: %i[wrong_value with_counterpart]
     factory :complete_contribution, traits: %i[with_counterpart]
   end
 end
