@@ -24,7 +24,7 @@ FactoryBot.define do
     end
 
     trait :wrong_value do
-      value { "" }
+      value { "a" }
     end
 
     factory :wrong_contribution, traits: %i[wrong_value with_counterpart]

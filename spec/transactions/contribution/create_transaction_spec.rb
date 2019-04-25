@@ -23,7 +23,7 @@ RSpec.describe Contribution::CreateTransaction do
     end
 
     context 'with invalid params' do
-      let(:contribution)  { build_stubbed(:wrong_contribution) }
+      let(:contribution)  { build(:contribution, :with_counterpart, value: "a") }
 
       it 'doesn\'t create a contribution' do
         VCR.use_cassette('contribution/failure_response') do
