@@ -14,13 +14,19 @@ RSpec.describe User::CreateTransaction do
       end
 
       it 'creates a user' do
-        expect { subject }.to change(User, :count).by(+1)
+        VCR.use_cassette('user/success_response') do
+          expect { subject }.to change(User, :count).by(+1)
+        end
       end
       it 'creates a profile' do
-        expect { subject }.to change(Profile, :count).by(+1)
+        VCR.use_cassette('user/success_response') do
+          expect { subject }.to change(Profile, :count).by(+1)
+        end
       end
       it 'sends the confirmation email' do
-        expect { subject }.to change(ActionMailer::Base.deliveries, :count).by(+1)
+        VCR.use_cassette('user/success_response') do
+          expect { subject }.to change(ActionMailer::Base.deliveries, :count).by(+1)
+        end
       end
     end
 

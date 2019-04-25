@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.sandbox.mangopay.com/v2.01/simonlp/users/natural
+    body:
+      encoding: UTF-8
+      string: '{"FirstName":"Melita","LastName":"Conn","Address":{"AddressLine1":"71448
+        Flatley Extension","AddressLine2":"Apt. 342","City":"Janiceview","Region":"Tennessee","PostalCode":"75010","Country":"MQ"},"Birthday":370825200,"Nationality":"SK","CountryOfResidence":"SA","Occupation":"worker","IncomeRange":2,"Email":"chad@franecki.info"}'
+    headers:
+      User-Agent:
+      - MANGOPAY V2 RubyBindings/3.0.31
+      Authorization:
+      - bearer e8675edeadcd4d69831c2e0e7b769391
+      Content-Type:
+      - application/json
+      X-Mangopay-Client-User-Agent:
+      - '{"bindings_version":"3.0.31","lang":"ruby","lang_version":"2.3.5 p376 (2017-09-14)","platform":"x86_64-darwin18","uname":"Darwin
+        Capsenss-MacBook-Pro.local 18.0.0 Darwin Kernel Version 18.0.0: Wed Aug 22
+        20:13:40 PDT 2018; root:xnu-4903.201.2~1/RELEASE_X86_64 x86_64"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Date:
+      - Thu, 25 Apr 2019 15:02:54 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '175'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=dc832e5749fba0c8faa8f7ff4d4815b461556204574; expires=Fri, 24-Apr-20
+        15:02:54 GMT; path=/; domain=.mangopay.com; HttpOnly
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      Www-Authenticate:
+      - Basic realm=MangopayAuthentication
+      - Bearer realm="MangopayAuthentication"
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 4cd1335f285bcdb1-CDG
+    body:
+      encoding: UTF-8
+      string: '{"Message":"The authorization credentials are not valid","Type":"invalid_credentials","Id":"e4f96b76-1100-4b82-bfd4-8ac035a97ab5#1556204574","Date":1556204575.0,"errors":null}'
+    http_version: 
+  recorded_at: Thu, 25 Apr 2019 15:02:54 GMT
+recorded_with: VCR 4.0.0
