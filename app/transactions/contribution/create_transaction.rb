@@ -32,7 +32,7 @@ class Contribution::CreateTransaction
   def payin(input)
     response = MangoPay::PayIn::Card::Web.create(payin_params(@contribution))
     if response['Id']
-      Success(input.merge(redirection: response["RedirectURL"]))
+      Success(input.merge(redirection: response["RedirectURL"])) 
     else
       Failure(input)
     end
@@ -55,7 +55,7 @@ class Contribution::CreateTransaction
       Fees: { Currency: 'EUR', Amount: 0 },
       CreditedWalletId: 64_348_317,
       CardType: 'CB_VISA_MASTERCARD',
-      ReturnURL: 'http://localhost:3000/projects',
+      ReturnURL: 'http://localhost:3000/check_response',
       Culture: 'FR'
     }
   end

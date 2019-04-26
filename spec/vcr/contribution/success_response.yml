@@ -2,65 +2,15 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.sandbox.mangopay.com/v2.01/oauth/token
-    body:
-      encoding: UTF-8
-      string: grant_type=client_credentials
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Authorization:
-      - Basic c2ltb25scDpjVWRkNEhBdlBRM044dnZMamRld3VDYjRlSFFBUFFNVGpubmpPZ0tneUxtdG1jNUNGSg==
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Thu, 25 Apr 2019 16:35:08 GMT
-      Content-Type:
-      - application/json;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Set-Cookie:
-      - __cfduid=d052534758c2c81589f3cce03d40520aa1556210107; expires=Fri, 24-Apr-20
-        16:35:07 GMT; path=/; domain=.mangopay.com; HttpOnly
-      Cache-Control:
-      - no-cache
-      Pragma:
-      - no-cache
-      Expires:
-      - "-1"
-      Expect-Ct:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
-      Server:
-      - cloudflare
-      Cf-Ray:
-      - 4cd1ba767dafcde5-CDG
-    body:
-      encoding: ASCII-8BIT
-      string: '{"access_token":"445c0fdd940b460687aa374df4ceaab8","token_type":"bearer","expires_in":1199}'
-    http_version: 
-  recorded_at: Thu, 25 Apr 2019 16:35:08 GMT
-- request:
-    method: post
     uri: https://api.sandbox.mangopay.com/v2.01/simonlp/payins/card/web
     body:
       encoding: UTF-8
-      string: '{"AuthorId":64361581,"PaymentType":"CARD","DebitedFunds":{"Currency":"EUR","Amount":498.0},"CreditedUserId":64347949,"Fees":{"Currency":"EUR","Amount":0},"CreditedWalletId":64348317,"CardType":"CB_VISA_MASTERCARD","ReturnURL":"http://localhost:3000/projects","Culture":"FR"}'
+      string: '{"AuthorId":64361581,"PaymentType":"CARD","DebitedFunds":{"Currency":"EUR","Amount":346.0},"CreditedUserId":64347949,"Fees":{"Currency":"EUR","Amount":0},"CreditedWalletId":64348317,"CardType":"CB_VISA_MASTERCARD","ReturnURL":"http://localhost:3000/projects","Culture":"FR"}'
     headers:
       User-Agent:
       - MANGOPAY V2 RubyBindings/3.0.31
       Authorization:
-      - bearer 445c0fdd940b460687aa374df4ceaab8
+      - bearer 088a3baad8a94cf0a46bc599d2d5becf
       Content-Type:
       - application/json
       X-Mangopay-Client-User-Agent:
@@ -77,7 +27,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 25 Apr 2019 16:35:08 GMT
+      - Thu, 25 Apr 2019 16:46:50 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -85,8 +35,8 @@ http_interactions:
       Connection:
       - keep-alive
       Set-Cookie:
-      - __cfduid=db86e23f9253a7e57cfd23557ddef8d771556210108; expires=Fri, 24-Apr-20
-        16:35:08 GMT; path=/; domain=.mangopay.com; HttpOnly
+      - __cfduid=deda878b2254ee20c22f5e919503f1ce71556210809; expires=Fri, 24-Apr-20
+        16:46:49 GMT; path=/; domain=.mangopay.com; HttpOnly
       Cache-Control:
       - no-cache
       Pragma:
@@ -94,29 +44,29 @@ http_interactions:
       Expires:
       - "-1"
       X-Ratelimit:
-      - '29'
-      - '50'
-      - '8'
-      - '91'
+      - '12'
+      - '23'
+      - '61'
+      - '98'
       X-Ratelimit-Remaining:
-      - '105509'
-      - '2292'
-      - '4471'
-      - '8750'
+      - '105502'
+      - '2288'
+      - '4477'
+      - '8739'
       X-Ratelimit-Reset:
-      - '1556211000'
-      - '1556211900'
-      - '1556213700'
-      - '1556296440'
+      - '1556211660'
+      - '1556212560'
+      - '1556214360'
+      - '1556297100'
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Server:
       - cloudflare
       Cf-Ray:
-      - 4cd1ba781a533c0b-CDG
+      - 4cd1cb99f934a899-CDG
     body:
       encoding: ASCII-8BIT
-      string: '{"Id":"64475041","Tag":null,"CreationDate":1556210108,"AuthorId":"64361581","CreditedUserId":"64347949","DebitedFunds":{"Currency":"EUR","Amount":498},"CreditedFunds":{"Currency":"EUR","Amount":498},"Fees":{"Currency":"EUR","Amount":0},"Status":"CREATED","ResultCode":null,"ResultMessage":null,"ExecutionDate":null,"Type":"PAYIN","Nature":"REGULAR","CreditedWalletId":"64348317","DebitedWalletId":null,"PaymentType":"CARD","ExecutionType":"WEB","RedirectURL":"https://homologation-secure-p.payline.com/webpayment/step2.do?reqCode=prepareStep2&token=1IsKvFYPpMvfefmx62561556210108348","ReturnURL":"http://localhost:3000/projects?transactionId=64475041","TemplateURL":"https://api.sandbox.mangopay.com/Content/PaylineTemplate?rp=0fd8c9e10dc444f993e4b0ea998b656b&transactionId=64475041","CardType":"CB_VISA_MASTERCARD","Culture":"FR","SecureMode":"DEFAULT","StatementDescriptor":null}'
+      string: '{"Id":"64475727","Tag":null,"CreationDate":1556210810,"AuthorId":"64361581","CreditedUserId":"64347949","DebitedFunds":{"Currency":"EUR","Amount":346},"CreditedFunds":{"Currency":"EUR","Amount":346},"Fees":{"Currency":"EUR","Amount":0},"Status":"CREATED","ResultCode":null,"ResultMessage":null,"ExecutionDate":null,"Type":"PAYIN","Nature":"REGULAR","CreditedWalletId":"64348317","DebitedWalletId":null,"PaymentType":"CARD","ExecutionType":"WEB","RedirectURL":"https://homologation-secure-p.payline.com/webpayment/step2.do?reqCode=prepareStep2&token=1Jaui1q6NsiHX8ou52811556210810233","ReturnURL":"http://localhost:3000/projects?transactionId=64475727","TemplateURL":"https://api.sandbox.mangopay.com/Content/PaylineTemplate?rp=6bd9dcecb6fd4e86ba86a81e734ac6d2&transactionId=64475727","CardType":"CB_VISA_MASTERCARD","Culture":"FR","SecureMode":"DEFAULT","StatementDescriptor":null}'
     http_version: 
-  recorded_at: Thu, 25 Apr 2019 16:35:08 GMT
+  recorded_at: Thu, 25 Apr 2019 16:46:50 GMT
 recorded_with: VCR 4.0.0

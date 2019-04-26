@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :contributions
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+  get 'check_response', to: 'contributions#check_response'
   get 'users/show', to: 'users#show', as: 'my_dashboard'
   root 'home#index'
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?

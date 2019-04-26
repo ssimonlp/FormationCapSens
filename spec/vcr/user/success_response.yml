@@ -2,86 +2,66 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.sandbox.mangopay.com/v2.01/simonlp/users/natural
+    uri: https://api.sandbox.mangopay.com/v2.01/oauth/token
     body:
       encoding: UTF-8
-      string: '{"FirstName":"Librada","LastName":"Bergnaum","Address":{"AddressLine1":"841
-        Hills Orchard","AddressLine2":"Apt. 593","City":"Davidview","Region":"Michigan","PostalCode":"75010","Country":"BW"},"Birthday":-490150800,"Nationality":"NL","CountryOfResidence":"AF","Occupation":"worker","IncomeRange":2,"Email":"estefanasawayn@morartorp.net"}'
+      string: grant_type=client_credentials
     headers:
-      User-Agent:
-      - MANGOPAY V2 RubyBindings/3.0.31
-      Authorization:
-      - bearer 445c0fdd940b460687aa374df4ceaab8
-      Content-Type:
-      - application/json
-      X-Mangopay-Client-User-Agent:
-      - '{"bindings_version":"3.0.31","lang":"ruby","lang_version":"2.3.5 p376 (2017-09-14)","platform":"x86_64-darwin18","uname":"Darwin
-        Capsenss-MacBook-Pro.local 18.0.0 Darwin Kernel Version 18.0.0: Wed Aug 22
-        20:13:40 PDT 2018; root:xnu-4903.201.2~1/RELEASE_X86_64 x86_64"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
+      User-Agent:
+      - Ruby
+      Authorization:
+      - Basic c2ltb25scDpjVWRkNEhBdlBRM044dnZMamRld3VDYjRlSFFBUFFNVGpubmpPZ0tneUxtdG1jNUNGSg==
+      Content-Type:
+      - application/x-www-form-urlencoded
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Thu, 25 Apr 2019 16:35:09 GMT
+      - Thu, 25 Apr 2019 16:46:48 GMT
       Content-Type:
-      - application/json; charset=utf-8
+      - application/json;charset=UTF-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
       Set-Cookie:
-      - __cfduid=dfdbe95a36d87d26d90ca88e7799b9ce71556210109; expires=Fri, 24-Apr-20
-        16:35:09 GMT; path=/; domain=.mangopay.com; HttpOnly
+      - __cfduid=d604b36d9896681c31e46bb0cc875adad1556210808; expires=Fri, 24-Apr-20
+        16:46:48 GMT; path=/; domain=.mangopay.com; HttpOnly
       Cache-Control:
       - no-cache
       Pragma:
       - no-cache
       Expires:
       - "-1"
-      X-Ratelimit:
-      - '30'
-      - '51'
-      - '9'
-      - '92'
-      X-Ratelimit-Remaining:
-      - '105508'
-      - '2291'
-      - '4470'
-      - '8749'
-      X-Ratelimit-Reset:
-      - '1556211000'
-      - '1556211900'
-      - '1556213700'
-      - '1556296440'
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Server:
       - cloudflare
       Cf-Ray:
-      - 4cd1ba7e48e5bd6a-CDG
+      - 4cd1cb90cf9668de-CDG
     body:
       encoding: ASCII-8BIT
-      string: '{"Address":{"AddressLine1":"841 Hills Orchard","AddressLine2":"Apt.
-        593","City":"Davidview","Region":"Michigan","PostalCode":"75010","Country":"BW"},"FirstName":"Librada","LastName":"Bergnaum","Birthday":-490150800,"Nationality":"NL","CountryOfResidence":"AF","Occupation":"worker","IncomeRange":2,"ProofOfIdentity":null,"ProofOfAddress":null,"Capacity":"NORMAL","PersonType":"NATURAL","Email":"estefanasawayn@morartorp.net","KYCLevel":"LIGHT","Id":"64475048","Tag":null,"CreationDate":1556210109}'
+      string: '{"access_token":"088a3baad8a94cf0a46bc599d2d5becf","token_type":"bearer","expires_in":1199}'
     http_version: 
-  recorded_at: Thu, 25 Apr 2019 16:35:09 GMT
+  recorded_at: Thu, 25 Apr 2019 16:46:48 GMT
 - request:
     method: post
-    uri: https://api.sandbox.mangopay.com/v2.01/simonlp/wallets
+    uri: https://api.sandbox.mangopay.com/v2.01/simonlp/users/natural
     body:
       encoding: UTF-8
-      string: '{"Owners":["64475048"],"Currency":"EUR","Description":"Test wallet"}'
+      string: '{"FirstName":"Zenia","LastName":"Hyatt","Address":{"AddressLine1":"117
+        Bobette Green","AddressLine2":"Apt. 580","City":"East Cleo","Region":"Hawaii","PostalCode":"75010","Country":"KZ"},"Birthday":854060400,"Nationality":"IN","CountryOfResidence":"AR","Occupation":"worker","IncomeRange":2,"Email":"clair@borerkiehn.name"}'
     headers:
       User-Agent:
       - MANGOPAY V2 RubyBindings/3.0.31
       Authorization:
-      - bearer 445c0fdd940b460687aa374df4ceaab8
+      - bearer 088a3baad8a94cf0a46bc599d2d5becf
       Content-Type:
       - application/json
       X-Mangopay-Client-User-Agent:
@@ -98,7 +78,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 25 Apr 2019 16:35:09 GMT
+      - Thu, 25 Apr 2019 16:46:48 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -106,8 +86,8 @@ http_interactions:
       Connection:
       - keep-alive
       Set-Cookie:
-      - __cfduid=d768fe01a7b9bcabc68218388341754a01556210109; expires=Fri, 24-Apr-20
-        16:35:09 GMT; path=/; domain=.mangopay.com; HttpOnly
+      - __cfduid=d19b6accfd6a37f14104b63650eaf266b1556210808; expires=Fri, 24-Apr-20
+        16:46:48 GMT; path=/; domain=.mangopay.com; HttpOnly
       Cache-Control:
       - no-cache
       Pragma:
@@ -116,28 +96,98 @@ http_interactions:
       - "-1"
       X-Ratelimit:
       - '10'
-      - '31'
-      - '52'
-      - '93'
+      - '21'
+      - '59'
+      - '96'
       X-Ratelimit-Remaining:
-      - '105507'
+      - '105504'
       - '2290'
-      - '4469'
-      - '8748'
+      - '4479'
+      - '8741'
       X-Ratelimit-Reset:
-      - '1556211000'
-      - '1556211900'
-      - '1556213700'
-      - '1556296440'
+      - '1556211660'
+      - '1556212560'
+      - '1556214360'
+      - '1556297100'
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Server:
       - cloudflare
       Cf-Ray:
-      - 4cd1ba7fcc4e68b4-CDG
+      - 4cd1cb926b06a8cf-CDG
     body:
       encoding: ASCII-8BIT
-      string: '{"Description":"Test wallet","Owners":["64475048"],"Balance":{"Currency":"EUR","Amount":0},"Currency":"EUR","FundsType":"DEFAULT","Id":"64475051","Tag":null,"CreationDate":1556210109}'
+      string: '{"Address":{"AddressLine1":"117 Bobette Green","AddressLine2":"Apt.
+        580","City":"East Cleo","Region":"Hawaii","PostalCode":"75010","Country":"KZ"},"FirstName":"Zenia","LastName":"Hyatt","Birthday":854060400,"Nationality":"IN","CountryOfResidence":"AR","Occupation":"worker","IncomeRange":2,"ProofOfIdentity":null,"ProofOfAddress":null,"Capacity":"NORMAL","PersonType":"NATURAL","Email":"clair@borerkiehn.name","KYCLevel":"LIGHT","Id":"64475725","Tag":null,"CreationDate":1556210808}'
     http_version: 
-  recorded_at: Thu, 25 Apr 2019 16:35:09 GMT
+  recorded_at: Thu, 25 Apr 2019 16:46:48 GMT
+- request:
+    method: post
+    uri: https://api.sandbox.mangopay.com/v2.01/simonlp/wallets
+    body:
+      encoding: UTF-8
+      string: '{"Owners":["64475725"],"Currency":"EUR","Description":"Test wallet"}'
+    headers:
+      User-Agent:
+      - MANGOPAY V2 RubyBindings/3.0.31
+      Authorization:
+      - bearer 088a3baad8a94cf0a46bc599d2d5becf
+      Content-Type:
+      - application/json
+      X-Mangopay-Client-User-Agent:
+      - '{"bindings_version":"3.0.31","lang":"ruby","lang_version":"2.3.5 p376 (2017-09-14)","platform":"x86_64-darwin18","uname":"Darwin
+        Capsenss-MacBook-Pro.local 18.0.0 Darwin Kernel Version 18.0.0: Wed Aug 22
+        20:13:40 PDT 2018; root:xnu-4903.201.2~1/RELEASE_X86_64 x86_64"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 25 Apr 2019 16:46:48 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d7112f2b9b7f1c642088b59c2d67a99351556210808; expires=Fri, 24-Apr-20
+        16:46:48 GMT; path=/; domain=.mangopay.com; HttpOnly
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Ratelimit:
+      - '11'
+      - '22'
+      - '60'
+      - '97'
+      X-Ratelimit-Remaining:
+      - '105503'
+      - '2289'
+      - '4478'
+      - '8740'
+      X-Ratelimit-Reset:
+      - '1556211660'
+      - '1556212560'
+      - '1556214360'
+      - '1556297100'
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 4cd1cb936c7ecd91-CDG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Description":"Test wallet","Owners":["64475725"],"Balance":{"Currency":"EUR","Amount":0},"Currency":"EUR","FundsType":"DEFAULT","Id":"64475726","Tag":null,"CreationDate":1556210808}'
+    http_version: 
+  recorded_at: Thu, 25 Apr 2019 16:46:48 GMT
 recorded_with: VCR 4.0.0
